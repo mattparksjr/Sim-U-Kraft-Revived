@@ -4,6 +4,7 @@ import codes.matthewp.sukr.event.ModCommonEvents;
 import codes.matthewp.sukr.event.ForgeCommonEvents;
 import codes.matthewp.sukr.event.ForgeClientEvents;
 import codes.matthewp.sukr.event.ModClientEvents;
+import codes.matthewp.sukr.init.BlockEntityInit;
 import codes.matthewp.sukr.init.BlockInit;
 import codes.matthewp.sukr.init.EntityInit;
 import codes.matthewp.sukr.init.ItemInit;
@@ -37,6 +38,7 @@ public class SimUKraft {
             .title(Component.translatable(MODID + ".tab"))
             .displayItems((parameters, output) -> {
                 output.accept(ItemInit.ITEM_GAMEMODE.get());
+                output.accept(BlockInit.BLOCK_CONSTRUCTOR.get());
             }).build());
 
     public SimUKraft() {
@@ -47,6 +49,7 @@ public class SimUKraft {
         BlockInit.BLOCKS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
         EntityInit.ENTITIES.register(modEventBus);
+        BlockEntityInit.BLOCK_ENTITIES.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -58,9 +61,6 @@ public class SimUKraft {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-            event.accept(BlockInit.EXAMPLE_BLOCK_ITEM);
-
         if(event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             event.accept(ItemInit.ITEM_CHEESE);
             event.accept(ItemInit.ITEM_BURGER);

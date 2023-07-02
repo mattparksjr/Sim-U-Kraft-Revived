@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "simukraftr:block/example_block"
+    "all": "simukraftr:block/block_constructor"
   }
 }

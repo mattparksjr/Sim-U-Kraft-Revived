@@ -1,7 +1,9 @@
 package codes.matthewp.sukr.block;
 
+import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
 import codes.matthewp.sukr.init.BlockEntityInit;
+import codes.matthewp.sukr.util.ClientUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -42,6 +44,9 @@ public class BlockConstructor extends Block implements EntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+        if(level.isClientSide) {
+            ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos));
+        }
         return super.use(state, level, pos, player, hand, result);
     }
 }

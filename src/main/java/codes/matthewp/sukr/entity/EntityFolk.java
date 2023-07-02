@@ -66,14 +66,11 @@ public class EntityFolk extends AgeableMob {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.MOVEMENT_SPEED, 0.5D);
     }
 
-
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob) {
         return EntityInit.FOLK.get().create(level);
     }
-
-
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
