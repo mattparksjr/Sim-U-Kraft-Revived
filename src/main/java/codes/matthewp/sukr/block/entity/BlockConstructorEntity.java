@@ -8,14 +8,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class BlockConstructorEntity extends BlockEntity {
 
-    private UUID employee;
+    private String employee;
 
     public BlockConstructorEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.CONSTRUCTOR.get(), pos, state);
+        employee = "";
     }
 
     public void tick() {
@@ -24,21 +26,24 @@ public class BlockConstructorEntity extends BlockEntity {
 
     @Override
     public void load(@NotNull CompoundTag tag) {
+        this.employee = tag.getString("employee");
         super.load(tag);
-        this.employee = tag.getUUID("employee");
     }
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
+        tag.putString("employee", this.employee);
         super.saveAdditional(tag);
-        tag.putUUID("employee", this.employee);
     }
 
     public UUID getEmployee() {
-        return employee;
+        if(Objects.equals(employee, "")) {
+            return null;
+        }
+        return UUID.fromString(employee);
     }
 
     public void setEmployee(UUID employee) {
-        this.employee = employee;
+        this.employee = employee.toString();
     }
 }
