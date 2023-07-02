@@ -1,0 +1,25 @@
+{
+  "item.simukraftr.item_gamemode": "Sim-U-Kraft",
+  "item.simukraftr.item_cheese": "Cheese",
+  "item.simukraftr.item_burger": "Burger",
+  "item.simukraftr.item_cheeseburger": "Cheeseburger",
+  "item.simukraftr.item_fries": "Fries",
+
+  "block.simukraftr.example_block": "Example Block",
+  "simukraftr.tab": "Sim-U-Kraft",
+  "key.category.debug": "Debug",
+
+  "simukraftr.message.gamemodeset": "Sim-U-Kraft - The gamemode has been set to: ",
+  "simukraftr.message.survival": "survival",
+  "simukraftr.message.creative": "creative",
+  "simukraftr.message.dnrset": "Sim-U-Kraft - Sim-U-Kraft has been set to not run for this world.",
+
+  "simukraftr.gui.gamemode.welcome": "Welcome to Sim-U-Kraft",
+  "simukraftr.gui.gamemode.mode": "Please choose a mode to play in:",
+  "simukraftr.gui.gamemode.donotrun": "Do NOT run Sim-U-Kraft",
+  "simukraftr.gui.gamemode.dnrdesc": "Sim-U-Kraft will not be active for this world.",
+  "simukraftr.gui.gamemode.sdesc": "Have to supply most resources. Money needed to build and hire sims etc.",
+  "simukraftr.gui.gamemode.cdesc": "Have to supply no resources. Everything is free. Let your imagination run wild.",
+  "simukraftr.gui.gamemode.survival": "Survival mode",
+  "simukraftr.gui.gamemode.creative": "Creative mode"
+}
