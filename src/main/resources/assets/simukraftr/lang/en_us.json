@@ -21,5 +21,6 @@
   "simukraftr.gui.gamemode.sdesc": "Have to supply most resources. Money needed to build and hire sims etc.",
   "simukraftr.gui.gamemode.cdesc": "Have to supply no resources. Everything is free. Let your imagination run wild.",
   "simukraftr.gui.gamemode.survival": "Survival mode",
-  "simukraftr.gui.gamemode.creative": "Creative mode"
+  "simukraftr.gui.gamemode.creative": "Creative mode",
+  "sounds.simukraft.constructor_activated": "[Building Constructor Activated]"
 }

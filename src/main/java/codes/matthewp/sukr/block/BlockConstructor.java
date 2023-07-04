@@ -2,6 +2,7 @@ package codes.matthewp.sukr.block;
 
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
 import codes.matthewp.sukr.init.BlockEntityInit;
+import codes.matthewp.sukr.init.SoundInit;
 import codes.matthewp.sukr.util.ClientUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 public class BlockConstructor extends Block implements EntityBlock {
 
     public BlockConstructor() {
-        super(Properties.of().sound(SoundType.WOOD).strength(2.0f, 1.0f));
+        super(Properties.of().sound(SoundType.WOOD).strength(2.0f, 1.0f).sound(SoundInit.CONSTRUCTOR_SOUNDS));
     }
 
     @Nullable

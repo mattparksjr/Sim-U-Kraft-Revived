@@ -4,10 +4,7 @@ import codes.matthewp.sukr.event.ForgeClientEvents;
 import codes.matthewp.sukr.event.ForgeCommonEvents;
 import codes.matthewp.sukr.event.ModClientEvents;
 import codes.matthewp.sukr.event.ModCommonEvents;
-import codes.matthewp.sukr.init.BlockEntityInit;
-import codes.matthewp.sukr.init.BlockInit;
-import codes.matthewp.sukr.init.EntityInit;
-import codes.matthewp.sukr.init.ItemInit;
+import codes.matthewp.sukr.init.*;
 import codes.matthewp.sukr.net.PacketHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
@@ -50,6 +47,7 @@ public class SimUKraft {
         ItemInit.ITEMS.register(modEventBus);
         EntityInit.ENTITIES.register(modEventBus);
         BlockEntityInit.BLOCK_ENTITIES.register(modEventBus);
+        SoundInit.SOUNDS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
