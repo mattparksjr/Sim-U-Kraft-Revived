@@ -7,20 +7,24 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
-public class EntityFolkRenderer extends MobRenderer<EntityFolk, FolkModel> {
+public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, HumanoidModel<EntityFolk>> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(SimUKraft.MODID, "textures/entity/male1.png");
 
     public EntityFolkRenderer(EntityRendererProvider.Context context) {
-        super(context, new FolkModel(context.bakeLayer(FolkModel.LAYER_LOCATION)), 0.7F);
+     //   super(context, new FolkModel(context.bakeLayer(FolkModel.LAYER_LOCATION)), 0.7F);
+        super(context, new HumanoidModel<EntityFolk>(context.bakeLayer(ModelLayers.PLAYER)), 0.5f);
     }
 
     @Override
