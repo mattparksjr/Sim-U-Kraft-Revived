@@ -1,5 +1,7 @@
 package codes.matthewp.sukr.entity;
 
+import codes.matthewp.sukr.data.folk.FolkData;
+import codes.matthewp.sukr.data.folk.FolkDataSerializer;
 import codes.matthewp.sukr.init.EntityInit;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 public class EntityFolk extends AgeableMob {
 
     private static final EntityDataAccessor<Integer> SKIN_ID = SynchedEntityData.defineId(EntityFolk.class, EntityDataSerializers.INT);
-
+    //private static final EntityDataAccessor<FolkData> folkData = SynchedEntityData.defineId(EntityFolk.class, FolkDataSerializer)
     private static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
             MemoryModuleType.HOME, MemoryModuleType.JOB_SITE, MemoryModuleType.MEETING_POINT,
             MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,

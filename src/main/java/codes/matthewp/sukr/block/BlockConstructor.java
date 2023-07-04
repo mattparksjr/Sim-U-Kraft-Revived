@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 public class BlockConstructor extends Block implements EntityBlock {
 
     public BlockConstructor() {
-        super(Properties.of().sound(SoundType.WOOD).strength(1f, 1f));
+        super(Properties.of().sound(SoundType.WOOD).strength(2.0f, 1.0f));
     }
 
     @Nullable

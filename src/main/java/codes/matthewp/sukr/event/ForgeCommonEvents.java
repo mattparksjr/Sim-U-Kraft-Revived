@@ -1,6 +1,7 @@
 package codes.matthewp.sukr.event;
 
 import codes.matthewp.sukr.SimUKraft;
+import codes.matthewp.sukr.data.folk.FolkNameData;
 import codes.matthewp.sukr.data.SimDataManager;
 import codes.matthewp.sukr.entity.EntityFolk;
 import codes.matthewp.sukr.init.ItemInit;
@@ -8,6 +9,7 @@ import codes.matthewp.sukr.net.PacketHandler;
 import codes.matthewp.sukr.net.packet.SyncGamemodeS2CPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -28,9 +30,14 @@ public class ForgeCommonEvents {
 
     @SubscribeEvent
     public static void despawn(MobSpawnEvent.AllowDespawn event) {
-        if(event.getEntity() instanceof EntityFolk) {
+        if (event.getEntity() instanceof EntityFolk) {
             event.setResult(Event.Result.DENY);
             event.setCanceled(true);
         }
+    }
+
+    @SubscribeEvent
+    public static void modEventHandler(AddReloadListenerEvent event) {
+        event.addListener(new FolkNameData());
     }
 }

@@ -53,10 +53,10 @@ public class SimUKraft {
         CREATIVE_MODE_TABS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new ModCommonEvents());
         MinecraftForge.EVENT_BUS.register(new ForgeClientEvents());
-        MinecraftForge.EVENT_BUS.register(new ModClientEvents());
         MinecraftForge.EVENT_BUS.register(new ForgeCommonEvents());
+        modEventBus.register(new ModCommonEvents());
+        modEventBus.register(new ModClientEvents());
         modEventBus.addListener(this::addCreative);
     }
 
