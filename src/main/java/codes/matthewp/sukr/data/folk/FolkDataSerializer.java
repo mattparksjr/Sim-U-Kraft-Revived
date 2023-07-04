@@ -1,25 +1,18 @@
 package codes.matthewp.sukr.data.folk;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializer;
 
 public class FolkDataSerializer implements EntityDataSerializer {
 
 
     @Override
-    public void write(FriendlyByteBuf p_135025_, Object p_135026_) {
-
+    public void write(FriendlyByteBuf buf, Object obj) {
     }
 
     @Override
-    public Object read(FriendlyByteBuf p_135024_) {
+    public Object read(FriendlyByteBuf buf) {
         return null;
-    }
-
-    @Override
-    public EntityDataAccessor createAccessor(int p_135022_) {
-        return EntityDataSerializer.super.createAccessor(p_135022_);
     }
 
     @Override
