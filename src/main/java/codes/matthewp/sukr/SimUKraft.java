@@ -1,9 +1,9 @@
 package codes.matthewp.sukr;
 
-import codes.matthewp.sukr.event.ModCommonEvents;
-import codes.matthewp.sukr.event.ForgeCommonEvents;
 import codes.matthewp.sukr.event.ForgeClientEvents;
+import codes.matthewp.sukr.event.ForgeCommonEvents;
 import codes.matthewp.sukr.event.ModClientEvents;
+import codes.matthewp.sukr.event.ModCommonEvents;
 import codes.matthewp.sukr.init.BlockEntityInit;
 import codes.matthewp.sukr.init.BlockInit;
 import codes.matthewp.sukr.init.EntityInit;
@@ -61,7 +61,7 @@ public class SimUKraft {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             event.accept(ItemInit.ITEM_CHEESE);
             event.accept(ItemInit.ITEM_BURGER);
             event.accept(ItemInit.ITEM_CHEESEBURGER);

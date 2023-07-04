@@ -1,8 +1,8 @@
 package codes.matthewp.sukr.util;
 
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
-import codes.matthewp.sukr.gui.constructor.ScreenConstructor;
 import codes.matthewp.sukr.gui.ScreenGamemode;
+import codes.matthewp.sukr.gui.constructor.ScreenConstructor;
 import net.minecraft.client.Minecraft;
 
 public class ClientUtil {

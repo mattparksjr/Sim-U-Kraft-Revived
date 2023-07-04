@@ -1,6 +1,5 @@
 package codes.matthewp.sukr.block;
 
-import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
 import codes.matthewp.sukr.init.BlockEntityInit;
 import codes.matthewp.sukr.util.ClientUtil;
@@ -36,7 +35,7 @@ public class BlockConstructor extends Block implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return level.isClientSide ? null : ($0, pos, $1, blockEntity) -> {
-            if(blockEntity instanceof BlockConstructorEntity blockConstructorEntity) {
+            if (blockEntity instanceof BlockConstructorEntity blockConstructorEntity) {
                 blockConstructorEntity.tick();
             }
         };
@@ -44,7 +43,7 @@ public class BlockConstructor extends Block implements EntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        if(level.isClientSide) {
+        if (level.isClientSide) {
             ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos));
         }
         return super.use(state, level, pos, player, hand, result);

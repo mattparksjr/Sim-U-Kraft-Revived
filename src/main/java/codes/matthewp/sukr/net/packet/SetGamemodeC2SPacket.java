@@ -1,6 +1,5 @@
 package codes.matthewp.sukr.net.packet;
 
-import codes.matthewp.sukr.data.ClientSimData;
 import codes.matthewp.sukr.data.SimDataManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;

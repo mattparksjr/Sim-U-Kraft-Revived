@@ -1,11 +1,9 @@
 package codes.matthewp.sukr.data;
 
 import codes.matthewp.sukr.net.PacketHandler;
-import codes.matthewp.sukr.net.packet.SetGamemodeC2SPacket;
 import codes.matthewp.sukr.net.packet.SyncGamemodeS2CPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 
@@ -26,7 +24,7 @@ SimDataManager extends SavedData {
 
     @Nonnull
     public static SimDataManager get(ServerLevel level) {
-        if(level.isClientSide) {
+        if (level.isClientSide) {
             throw new RuntimeException("Illegal attempt to access server data from client side!");
         }
 

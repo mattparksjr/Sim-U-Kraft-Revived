@@ -32,8 +32,6 @@ public class FolkData {
     }
 
 
-
-
     public static FolkData generateRandom() {
         FolkData data = new FolkData();
         Random random = new Random();

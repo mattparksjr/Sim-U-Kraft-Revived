@@ -18,6 +18,7 @@ import org.joml.Matrix4f;
 public class EntityFolkRenderer extends MobRenderer<EntityFolk, FolkModel> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(SimUKraft.MODID, "textures/entity/male1.png");
+
     public EntityFolkRenderer(EntityRendererProvider.Context context) {
         super(context, new FolkModel(context.bakeLayer(FolkModel.LAYER_LOCATION)), 0.7F);
     }

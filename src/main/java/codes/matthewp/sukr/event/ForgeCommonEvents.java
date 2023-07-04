@@ -1,8 +1,8 @@
 package codes.matthewp.sukr.event;
 
 import codes.matthewp.sukr.SimUKraft;
-import codes.matthewp.sukr.data.folk.FolkNameData;
 import codes.matthewp.sukr.data.SimDataManager;
+import codes.matthewp.sukr.data.folk.FolkNameData;
 import codes.matthewp.sukr.entity.EntityFolk;
 import codes.matthewp.sukr.init.ItemInit;
 import codes.matthewp.sukr.net.PacketHandler;

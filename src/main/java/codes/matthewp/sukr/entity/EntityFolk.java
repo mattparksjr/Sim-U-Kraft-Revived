@@ -1,7 +1,5 @@
 package codes.matthewp.sukr.entity;
 
-import codes.matthewp.sukr.data.folk.FolkData;
-import codes.matthewp.sukr.data.folk.FolkDataSerializer;
 import codes.matthewp.sukr.init.EntityInit;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.nbt.CompoundTag;

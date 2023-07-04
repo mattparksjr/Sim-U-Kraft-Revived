@@ -4,7 +4,6 @@ import codes.matthewp.sukr.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,7 +36,7 @@ public class BlockConstructorEntity extends BlockEntity {
     }
 
     public UUID getEmployee() {
-        if(Objects.equals(employee, "")) {
+        if (Objects.equals(employee, "")) {
             return null;
         }
         return UUID.fromString(employee);

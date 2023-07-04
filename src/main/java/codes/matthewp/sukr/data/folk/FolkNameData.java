@@ -51,17 +51,17 @@ public class FolkNameData extends SimpleJsonResourceReloadListener {
                 }
 
                 JsonArray maleANameIn = jsonobject.get("maleNames").getAsJsonArray();
-                for(JsonElement entry : maleANameIn) {
+                for (JsonElement entry : maleANameIn) {
                     maleNames.add(entry.getAsString());
                 }
 
                 JsonArray femaleANameIn = jsonobject.get("femaleNames").getAsJsonArray();
-                for(JsonElement entry : femaleANameIn) {
+                for (JsonElement entry : femaleANameIn) {
                     femaleNames.add(entry.getAsString());
                 }
 
                 JsonArray lastNameIn = jsonobject.get("lastNames").getAsJsonArray();
-                for(JsonElement entry : lastNameIn) {
+                for (JsonElement entry : lastNameIn) {
                     lastNames.add(entry.getAsString());
                 }
             } catch (RuntimeException | IOException ex) {

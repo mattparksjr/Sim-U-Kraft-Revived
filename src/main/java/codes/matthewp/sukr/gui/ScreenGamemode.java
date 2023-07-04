@@ -1,17 +1,12 @@
 package codes.matthewp.sukr.gui;
 
-import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.net.PacketHandler;
 import codes.matthewp.sukr.net.packet.SetGamemodeC2SPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.network.chat.Component;
 
 public class ScreenGamemode extends Screen {
@@ -36,11 +31,11 @@ public class ScreenGamemode extends Screen {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(graphics);
 
-        graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.gamemode.welcome").withStyle(ChatFormatting.WHITE), width / 2, height / 3 - 70,1);
+        graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.gamemode.welcome").withStyle(ChatFormatting.WHITE), width / 2, height / 3 - 70, 1);
         graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.gamemode.mode").withStyle(ChatFormatting.WHITE), width / 2, height / 3 - 60, 1);
 
         graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.gamemode.dnrdesc").withStyle(ChatFormatting.GOLD), width / 2, height / 3 - 15, 1);
-        graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.gamemode.sdesc").withStyle(ChatFormatting.GOLD), width / 2, height / 3  + 35, 1);
+        graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.gamemode.sdesc").withStyle(ChatFormatting.GOLD), width / 2, height / 3 + 35, 1);
         graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.gamemode.cdesc").withStyle(ChatFormatting.GOLD), width / 2, height / 3 + 85, 1);
 
 
