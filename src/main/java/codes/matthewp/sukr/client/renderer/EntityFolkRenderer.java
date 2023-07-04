@@ -4,6 +4,7 @@ import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.client.models.FolkModel;
 import codes.matthewp.sukr.entity.EntityFolk;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -11,7 +12,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
@@ -24,35 +24,44 @@ public class EntityFolkRenderer extends MobRenderer<EntityFolk, FolkModel> {
     }
 
     @Override
-    protected void renderNameTag(@NotNull EntityFolk folk, @NotNull Component component, @NotNull PoseStack pose, @NotNull MultiBufferSource buf, int p_114502_) {
-        double d0 = this.entityRenderDispatcher.distanceToSqr(folk);
-        if (ForgeHooksClient.isNameplateInRenderDistance(folk, d0)) {
-            boolean flag = !folk.isDiscrete();
-            float f = folk.getNameTagOffsetY();
-            pose.pushPose();
-            pose.translate(0.0F, f, 0.0F);
-            pose.mulPose(this.entityRenderDispatcher.cameraOrientation());
-            pose.scale(-0.025F, -0.025F, 0.025F);
-            Matrix4f matrix4f = pose.last().pose();
-            float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
-            int j = (int) (f1 * 255.0F) << 24;
-            Font font = this.getFont();
-            float f2 = (float) (-font.width(component) / 2);
-            font.drawInBatch(component, f2, 0, 553648127, false, matrix4f, buf, flag ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL, j, p_114502_);
-            font.drawInBatch(component, f2, 0, 553648127, false, matrix4f, buf, flag ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL, j, 1);
-            font.drawInBatch(component, f2, 0, 553648127, false, matrix4f, buf, flag ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL, j, 10);
-            font.drawInBatch(component, f2, 0, 553648127, false, matrix4f, buf, flag ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL, j, -50);
-            font.drawInBatch(component, f2, 0, 553648127, false, matrix4f, buf, flag ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL, j, 100);
-            if (flag) {
-                font.drawInBatch(component, f2, 9, -1, false, matrix4f, buf, Font.DisplayMode.NORMAL, 0, p_114502_);
-            }
+    protected void renderNameTag(@NotNull EntityFolk folk, @NotNull Component component, @NotNull PoseStack pose, @NotNull MultiBufferSource buf, int packedLightCoords) {
+        double distanceToSqr = this.entityRenderDispatcher.distanceToSqr(folk);
+        float baseOffset = folk.getNameTagOffsetY();
+        float opacity = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
+        Font font = this.getFont();
 
-            pose.popPose();
+        if (distanceToSqr > 100.0) return;
+
+        // Player is looking directly at folk, need to show detail view.
+        if (this.entityRenderDispatcher.crosshairPickEntity != null && this.entityRenderDispatcher.crosshairPickEntity.distanceToSqr(folk) <= 4.0) {
+            renderLine(Component.literal("Folk name"), pose, baseOffset + 1.25f, opacity, font, buf, packedLightCoords);
+            renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 1f, opacity, font, buf, packedLightCoords);
+            renderLine(Component.literal("Folk job").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.75f, opacity, font, buf, packedLightCoords);
+            renderLine(Component.literal("Folk home").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.50f, opacity, font, buf, packedLightCoords);
+            renderLine(Component.literal("Folk relationship status").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.25f, opacity, font, buf, packedLightCoords);
+            renderLine(Component.literal("Folk hunger").withStyle(ChatFormatting.YELLOW), pose, baseOffset, opacity, font, buf, packedLightCoords);
+            return;
         }
+
+        // Entity is within view, but not being looked at
+        renderLine(Component.literal("Folk name"), pose, baseOffset + 0.25f, opacity, font, buf, packedLightCoords);
+        renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset, opacity, font, buf, packedLightCoords);
+    }
+
+    private void renderLine(Component text, PoseStack pose, float offset, float opacity, Font font, MultiBufferSource buf, int packedLightCoords) {
+        float width = (float) (-font.width(text) / 2);
+        int opacityOut = (int) (opacity * 255.0F) << 24;
+        pose.pushPose();
+        pose.translate(0.0F, offset, 0.0F);
+        pose.mulPose(this.entityRenderDispatcher.cameraOrientation());
+        pose.scale(-0.025F, -0.025F, 0.025F);
+        Matrix4f matrix4f = pose.last().pose();
+        font.drawInBatch(text, width, 0, -1, false, matrix4f, buf, Font.DisplayMode.NORMAL, opacityOut, packedLightCoords);
+        pose.popPose();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EntityFolk entityFolk) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull EntityFolk entityFolk) {
         return TEXTURE;
     }
 }
