@@ -20,6 +20,8 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -54,5 +56,21 @@ public class ForgeCommonEvents {
         if(event.phase == TickEvent.Phase.END) {
             TickHandler.handleTick(event.getServer());
         }
+    }
+
+    @SubscribeEvent
+    public static void onServerClosing(ServerStoppingEvent event) {
+        SimUKraft.LOGGER.debug("DEBUG DEBUG : " + event.getServer().overworld().getDayTime());
+    }
+
+    @SubscribeEvent
+    public static void onServerStarting(ServerStartingEvent event) {
+        SimUKraft.LOGGER.debug("DEBUG DEBUG : " + event.getServer().overworld().getDayTime());
+    }
+
+
+    @SubscribeEvent
+    public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
+        SimUKraft.LOGGER.debug("DEBUG DEBUG : " + event.getEntity().getServer().overworld().getDayTime());
     }
 }
