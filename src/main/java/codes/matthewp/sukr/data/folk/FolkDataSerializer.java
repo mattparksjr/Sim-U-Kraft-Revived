@@ -3,15 +3,14 @@ package codes.matthewp.sukr.data.folk;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
 
-public class FolkDataSerializer implements EntityDataSerializer {
-
+public class FolkDataSerializer<FolkData> implements EntityDataSerializer<FolkData> {
 
     @Override
     public void write(FriendlyByteBuf buf, Object obj) {
     }
 
     @Override
-    public Object read(FriendlyByteBuf buf) {
+    public FolkData read(FriendlyByteBuf buf) {
         return null;
     }
 

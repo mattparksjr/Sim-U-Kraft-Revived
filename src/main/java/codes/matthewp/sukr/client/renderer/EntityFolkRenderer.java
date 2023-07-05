@@ -20,8 +20,6 @@ import org.joml.Matrix4f;
 
 public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, HumanoidModel<EntityFolk>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(SimUKraft.MODID, "textures/entity/male1.png");
-
     public EntityFolkRenderer(EntityRendererProvider.Context context) {
      //   super(context, new FolkModel(context.bakeLayer(FolkModel.LAYER_LOCATION)), 0.7F);
         super(context, new HumanoidModel<EntityFolk>(context.bakeLayer(ModelLayers.PLAYER)), 0.5f);
@@ -38,7 +36,7 @@ public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, Humanoi
 
         // Player is looking directly at folk, need to show detail view.
         if (this.entityRenderDispatcher.crosshairPickEntity != null && this.entityRenderDispatcher.crosshairPickEntity.distanceToSqr(folk) <= 4.0) {
-            renderLine(Component.literal("Folk name"), pose, baseOffset + 1.25f, opacity, font, buf, packedLightCoords);
+            renderLine(Component.literal(folk.folkData.firstName + " " + folk.folkData.lastName + "(" +folk.folkData.age + ")"), pose, baseOffset + 1.25f, opacity, font, buf, packedLightCoords);
             renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 1f, opacity, font, buf, packedLightCoords);
             renderLine(Component.literal("Folk job").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.75f, opacity, font, buf, packedLightCoords);
             renderLine(Component.literal("Folk home").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.50f, opacity, font, buf, packedLightCoords);
@@ -48,7 +46,7 @@ public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, Humanoi
         }
 
         // Entity is within view, but not being looked at
-        renderLine(Component.literal("Folk name"), pose, baseOffset + 0.25f, opacity, font, buf, packedLightCoords);
+        renderLine(Component.literal(folk.folkData.firstName + " " + folk.folkData.lastName + "(" +folk.folkData.age + ")"), pose, baseOffset + 0.25f, opacity, font, buf, packedLightCoords);
         renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset, opacity, font, buf, packedLightCoords);
     }
 
@@ -66,6 +64,9 @@ public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, Humanoi
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull EntityFolk entityFolk) {
-        return TEXTURE;
+        if(entityFolk.folkData.gender == 1) {
+            return new ResourceLocation(SimUKraft.MODID, "textures/entity/female" + entityFolk.folkData.skinID + ".png");
+        }
+        return new ResourceLocation(SimUKraft.MODID, "textures/entity/male" + entityFolk.folkData.skinID + ".png");
     }
 }

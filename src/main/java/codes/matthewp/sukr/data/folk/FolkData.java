@@ -1,41 +1,63 @@
 package codes.matthewp.sukr.data.folk;
 
+import codes.matthewp.sukr.data.SimDataManager;
 import net.minecraft.core.BlockPos;
 
 import java.util.Random;
 
 public class FolkData {
 
-    private BlockPos home;
-    private BlockPos jobSite;
+    public String firstName;
 
-    private String name;
+    public String lastName;
+    public int age;
 
-    private int age;
+    public int gender;
 
-    private int gender;
+    public int skinID;
 
-    private int skinID;
+    public int foodLevel;
 
-    private int foodLevel;
+    public float skillBuild;
 
-    private int skillBuild;
+    public float skillMine;
 
-    private int skillMine;
+    public float skillSoldier;
 
-    private int skillSoldier;
+    public boolean standStill;
 
-    private boolean standStill;
+    public BlockPos home;
+
+    public BlockPos jobSite;
+
 
     public FolkData() {
 
     }
 
-
-    public static FolkData generateRandom() {
+    public static FolkData generateRandomFolk() {
         FolkData data = new FolkData();
         Random random = new Random();
+
+        // TODO: SKIN after more are added.
         data.gender = random.nextInt(2);
+        if(data.gender == 1) {
+            data.firstName = FolkNameData.getFemaleNames().get(random.nextInt(FolkNameData.getFemaleNames().size()));
+            data.skinID = 22;
+        } else {
+            data.firstName = FolkNameData.getMaleNames().get(random.nextInt(FolkNameData.getMaleNames().size()));
+            data.skinID = 1;
+        }
+
+        data.lastName = FolkNameData.getLastNames().get(random.nextInt(FolkNameData.getLastNames().size()));
+        data.age = 18;
+        data.foodLevel = 10;
+        data.skillBuild = 1f;
+        data.skillMine = 1f;
+        data.skillSoldier = 1f;
+        data.standStill = false;
+        data.home = new BlockPos(0, -999, 0);
+        data.jobSite = new BlockPos(0, -999, 0);
 
         return data;
     }

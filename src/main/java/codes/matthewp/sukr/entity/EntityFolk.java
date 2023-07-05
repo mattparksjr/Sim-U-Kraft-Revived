@@ -1,5 +1,7 @@
 package codes.matthewp.sukr.entity;
 
+import codes.matthewp.sukr.data.folk.FolkData;
+import codes.matthewp.sukr.data.folk.FolkDataSerializer;
 import codes.matthewp.sukr.data.folk.FolkNameData;
 import codes.matthewp.sukr.init.EntityInit;
 import com.google.common.collect.ImmutableList;
@@ -41,7 +43,10 @@ public class EntityFolk extends AgeableMob {
  //   public static final EntityDataAccessor<BlockPos> HOME = SynchedEntityData.defineId(EntityFolk.class, EntityDataSerializers.BLOCK_POS);
 
 
-    //private static final EntityDataAccessor<FolkData> folkData = SynchedEntityData.defineId(EntityFolk.class, FolkDataSerializer)
+    public FolkData folkData;
+
+ //   private static final EntityDataAccessor<FolkData> TEST_VAR = SynchedEntityData.defineId(EntityFolk.class, new FolkDataSerializer<>());
+
     private static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
             MemoryModuleType.HOME, MemoryModuleType.JOB_SITE, MemoryModuleType.MEETING_POINT,
             MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
@@ -64,8 +69,7 @@ public class EntityFolk extends AgeableMob {
         super(entityType, level);
         this.getNavigation().setCanFloat(true);
         this.setCanPickUpLoot(true);
-        this.setCustomName(Component.literal("EEEEEE"));
-        this.setCustomNameVisible(true);
+        this.folkData = FolkData.generateRandomFolk();
         ((GroundPathNavigation) this.getNavigation()).setCanOpenDoors(true);
         // TODO
         this.entityData.set(SKIN_ID, 1);
@@ -79,6 +83,12 @@ public class EntityFolk extends AgeableMob {
         this.entityData.set(LEVEL_FOOD, 10);
      //   this.entityData.set(JOB_SITE, new BlockPos(0, -999, 0));
     //    this.entityData.set(HOME, new BlockPos(0, -999, 0));
+  //      this.entityData.set(TEST_VAR, this.folkData);
+    }
+
+    @Override
+    public void kill() {
+        super.kill();
     }
 
     @Override
@@ -112,6 +122,7 @@ public class EntityFolk extends AgeableMob {
         this.entityData.set(LEVEL_BUILDING, tag.getFloat("food"));
         this.entityData.set(LEVEL_MINING, tag.getFloat("food"));
         this.entityData.set(LEVEL_SOLIDER, tag.getFloat("food"));
+
      //   this.entityData.set(JOB_SITE, NbtUtils.readBlockPos((CompoundTag) tag.get("job_site")));
       //  this.entityData.set(HOME, NbtUtils.readBlockPos((CompoundTag) tag.get("home")));
     }
@@ -128,6 +139,7 @@ public class EntityFolk extends AgeableMob {
         tag.putFloat("lvl_building", this.entityData.get(LEVEL_BUILDING));
         tag.putFloat("lvl_mining", this.entityData.get(LEVEL_MINING));
         tag.putFloat("lvl_solider", this.entityData.get(LEVEL_SOLIDER));
+     //   tag.put("folk_data", this.entityData.get(TEST_VAR));
     //    tag.put("job_site", NbtUtils.writeBlockPos(this.entityData.get(JOB_SITE)));
     //    tag.put("home", NbtUtils.writeBlockPos(this.entityData.get(HOME)));
     }
@@ -135,6 +147,7 @@ public class EntityFolk extends AgeableMob {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
+      //  this.entityData.define(TEST_VAR, FolkData.generateRandomFolk());
         this.entityData.define(SKIN_ID, 0);
         this.entityData.define(FIRST_NAME, "first_name");
         this.entityData.define(LAST_NAME, "last_name");

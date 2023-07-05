@@ -1,5 +1,6 @@
 package codes.matthewp.sukr.data;
 
+import codes.matthewp.sukr.data.folk.FolkData;
 import codes.matthewp.sukr.net.PacketHandler;
 import codes.matthewp.sukr.net.packet.SyncGamemodeS2CPacket;
 import net.minecraft.nbt.CompoundTag;
@@ -8,6 +9,8 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class
 SimDataManager extends SavedData {

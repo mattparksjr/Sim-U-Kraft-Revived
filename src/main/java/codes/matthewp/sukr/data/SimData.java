@@ -1,12 +1,15 @@
 package codes.matthewp.sukr.data;
 
+import codes.matthewp.sukr.data.folk.FolkData;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class SimData {
 
     private int gamemode;
-    private ArrayList<UUID> sims;
+    private List<FolkData> sims;
 
     public SimData(int gamemode) {
         setGamemode(gamemode);
@@ -23,5 +26,9 @@ public class SimData {
 
     public void setGamemode(int gamemode) {
         this.gamemode = gamemode;
+    }
+
+    public List<FolkData> getFolks() {
+        return sims;
     }
 }
