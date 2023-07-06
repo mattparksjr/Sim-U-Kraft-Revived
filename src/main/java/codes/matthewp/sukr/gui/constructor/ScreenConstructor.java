@@ -24,7 +24,7 @@ public class ScreenConstructor extends Screen {
     @Override
     protected void init() {
         super.init();
-        buttonW = (width - 20) / 3;
+        buttonW = Math.min(200, (width - 20) / 3);
 
         this.addRenderableWidget(new Button.Builder(Component.literal("Done"), ScreenConstructor::pressDone).size(40, buttonH).pos(5, 5).build());
 
