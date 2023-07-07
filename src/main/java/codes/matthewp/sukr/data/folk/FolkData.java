@@ -26,11 +26,6 @@ public class FolkData {
 
     public boolean standStill;
 
-    public BlockPos home;
-
-    public BlockPos jobSite;
-
-
     public FolkData() {
 
     }
@@ -41,7 +36,7 @@ public class FolkData {
 
         // TODO: SKIN after more are added.
         data.gender = random.nextInt(2);
-        if(data.gender == 1) {
+        if(data.gender == 0) {
             data.firstName = FolkNameData.getFemaleNames().get(random.nextInt(FolkNameData.getFemaleNames().size()));
             data.skinID = 22;
         } else {
@@ -56,9 +51,6 @@ public class FolkData {
         data.skillMine = 1f;
         data.skillSoldier = 1f;
         data.standStill = false;
-        data.home = new BlockPos(0, -999, 0);
-        data.jobSite = new BlockPos(0, -999, 0);
-
         return data;
     }
 
