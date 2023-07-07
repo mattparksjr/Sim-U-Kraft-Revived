@@ -18,9 +18,9 @@ displayName = "${mod_name}"
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="examplemod.png" #optional
-credits="Scott Hatger for the orignal mod. The Resimulators for the 1.12.2 version." #optional
+credits = "Scott Hatger for the orignal mod. The Resimulators for the 1.12.2 version." #optional
 authors = "${mod_authors}" #optional
-displayTest="MATCH_VERSION"
+displayTest = "MATCH_VERSION"
 
 description = '''${mod_description}'''
 

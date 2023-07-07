@@ -1,8 +1,5 @@
 package codes.matthewp.sukr.data.folk;
 
-import codes.matthewp.sukr.data.SimDataManager;
-import net.minecraft.core.BlockPos;
-
 import java.util.Random;
 
 public class FolkData {
@@ -36,7 +33,7 @@ public class FolkData {
 
         // TODO: SKIN after more are added.
         data.gender = random.nextInt(2);
-        if(data.gender == 0) {
+        if (data.gender == 0) {
             data.firstName = FolkNameData.getFemaleNames().get(random.nextInt(FolkNameData.getFemaleNames().size()));
             data.skinID = 22;
         } else {

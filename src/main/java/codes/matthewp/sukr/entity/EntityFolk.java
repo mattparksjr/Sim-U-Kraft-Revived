@@ -1,8 +1,6 @@
 package codes.matthewp.sukr.entity;
 
-import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.data.folk.FolkData;
-import codes.matthewp.sukr.data.folk.FolkNameData;
 import codes.matthewp.sukr.init.EntityInit;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.Minecraft;
@@ -14,25 +12,27 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 public class EntityFolk extends AgeableMob {
 
@@ -71,20 +71,6 @@ public class EntityFolk extends AgeableMob {
         this.getNavigation().setCanFloat(true);
         this.setCanPickUpLoot(true);
         ((GroundPathNavigation) this.getNavigation()).setCanOpenDoors(true);
-        // TODO
-        FolkData data = FolkData.generateRandomFolk();
-        SimUKraft.LOGGER.debug("ENTITY FOLK CONSTRUCTOR CALLED");
-        this.entityData.set(SKIN_ID, data.skinID);
-        SimUKraft.LOGGER.debug(data.firstName);
-        this.entityData.set(FIRST_NAME, data.firstName);
-        SimUKraft.LOGGER.debug(this.getEntityData().get(FIRST_NAME));
-        this.entityData.set(LAST_NAME, data.lastName);
-        this.entityData.set(GENDER, data.gender);
-        this.entityData.set(AGE, data.age);
-        this.entityData.set(LEVEL_FOOD, data.foodLevel);
-        this.entityData.set(LEVEL_BUILDING, data.skillBuild);
-        this.entityData.set(LEVEL_MINING, data.skillMine);
-        this.entityData.set(LEVEL_SOLIDER, data.skillSoldier);
     }
 
     @Override
@@ -93,9 +79,28 @@ public class EntityFolk extends AgeableMob {
     }
 
     @Override
+    public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor levelAccessor, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType type, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag tag) {
+        FolkData data = FolkData.generateRandomFolk();
+
+        this.entityData.set(SKIN_ID, data.skinID);
+        this.entityData.set(FIRST_NAME, data.firstName);
+        this.entityData.set(LAST_NAME, data.lastName);
+        this.entityData.set(GENDER, data.gender);
+        if (type.equals(MobSpawnType.BREEDING)) {
+            this.entityData.set(AGE, 1);
+        } else {
+            this.entityData.set(AGE, data.age);
+        }
+        this.entityData.set(LEVEL_FOOD, data.foodLevel);
+        this.entityData.set(LEVEL_BUILDING, data.skillBuild);
+        this.entityData.set(LEVEL_MINING, data.skillMine);
+        this.entityData.set(LEVEL_SOLIDER, data.skillSoldier);
+        return super.finalizeSpawn(levelAccessor, difficulty, type, spawnData, tag);
+    }
+
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -107,13 +112,19 @@ public class EntityFolk extends AgeableMob {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob) {
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob mob) {
         return EntityInit.FOLK.get().create(level);
     }
 
     @Override
+    public void onItemPickup(ItemEntity itemEntity) {
+        super.onItemPickup(itemEntity);
+        setItemInHand(InteractionHand.MAIN_HAND, itemEntity.getItem());
+    }
+
+    @Override
     public @NotNull InteractionResult interactAt(@NotNull Player player, @NotNull Vec3 loc, @NotNull InteractionHand hand) {
-        if(player.getServer() == null) return InteractionResult.PASS;
+        if (this.level().isClientSide) return InteractionResult.PASS;
         Minecraft.getInstance().player.sendSystemMessage(Component.literal("Data: " + this.entityData.get(SKIN_ID) + " , " + this.entityData.get(HOME)));
         return super.interactAt(player, loc, hand);
     }
@@ -121,7 +132,6 @@ public class EntityFolk extends AgeableMob {
     @Override
     public void readAdditionalSaveData(@NotNull CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        SimUKraft.LOGGER.debug("READADD() CALLED");
         this.entityData.set(SKIN_ID, tag.getInt("skin_id"));
         this.entityData.set(FIRST_NAME, tag.getString("first_name"));
         this.entityData.set(LAST_NAME, tag.getString("last_name"));
@@ -131,13 +141,13 @@ public class EntityFolk extends AgeableMob {
         this.entityData.set(LEVEL_BUILDING, tag.getFloat("food"));
         this.entityData.set(LEVEL_MINING, tag.getFloat("food"));
         this.entityData.set(LEVEL_SOLIDER, tag.getFloat("food"));
-        if(!(tag.get("job_site") == null)) {
+        if (!(tag.get("job_site") == null)) {
             this.entityData.set(JOB_SITE, NbtUtils.readBlockPos((CompoundTag) tag.get("job_site")));
         } else {
             this.entityData.set(JOB_SITE, new BlockPos(0, 999, 0));
         }
 
-        if(!(tag.get("home") == null)) {
+        if (!(tag.get("home") == null)) {
             this.entityData.set(HOME, NbtUtils.readBlockPos((CompoundTag) tag.get("home")));
         } else {
             this.entityData.set(HOME, new BlockPos(0, 999, 0));
@@ -147,7 +157,6 @@ public class EntityFolk extends AgeableMob {
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        SimUKraft.LOGGER.debug("ADDADD() CALLED");
         tag.putInt("skin_id", this.entityData.get(SKIN_ID));
         tag.putString("first_name", this.entityData.get(FIRST_NAME));
         tag.putString("last_name", this.entityData.get(LAST_NAME));
@@ -164,7 +173,6 @@ public class EntityFolk extends AgeableMob {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        SimUKraft.LOGGER.debug("DEFINESYNCHED() CALLED");
         this.entityData.define(SKIN_ID, 999);
         this.entityData.define(FIRST_NAME, "first_name");
         this.entityData.define(LAST_NAME, "last_name");
@@ -174,7 +182,7 @@ public class EntityFolk extends AgeableMob {
         this.entityData.define(LEVEL_BUILDING, 999f);
         this.entityData.define(LEVEL_MINING, 999f);
         this.entityData.define(LEVEL_SOLIDER, 99f);
-        this.entityData.define(JOB_SITE, new BlockPos(0,0,0));
+        this.entityData.define(JOB_SITE, new BlockPos(0, 0, 0));
         this.entityData.define(HOME, new BlockPos(0, 0, 0));
     }
 }

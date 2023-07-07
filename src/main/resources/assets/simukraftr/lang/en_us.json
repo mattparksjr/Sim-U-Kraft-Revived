@@ -11,6 +11,7 @@
   "simukraftr.message.survival": "survival",
   "simukraftr.message.creative": "creative",
   "simukraftr.message.dnrset": "Sim-U-Kraft - Sim-U-Kraft has been set to not run for this world.",
+  "simukraftr.text.homeless":  "Homeless",
   "simukraftr.gui.constructor.title": "Building Constructor",
   "simukraftr.gui.constructor.choosetask": "Please choose a task for this building constructor",
   "simukraftr.gui.constructor.choosefolk": "Please choose an unemployed folk you want to hire",
