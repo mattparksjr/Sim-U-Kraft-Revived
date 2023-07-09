@@ -11,8 +11,8 @@ import net.minecraft.network.chat.Component;
 
 public class ScreenGamemode extends Screen {
 
-    private int buttonW = 200;
-    private int buttonH = 20;
+    private final int buttonW = 200;
+    private final int buttonH = 20;
 
     public ScreenGamemode() {
         super(Component.literal("Gamemode Selection"));

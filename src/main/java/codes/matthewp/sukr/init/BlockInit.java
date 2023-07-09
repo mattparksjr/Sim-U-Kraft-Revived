@@ -5,9 +5,7 @@ import codes.matthewp.sukr.block.BlockConstructor;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -17,25 +15,25 @@ public class BlockInit {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SimUKraft.MODID);
     public static final RegistryObject<Block> BLOCK_CONSTRUCTOR = BLOCKS.register("block_constructor", BlockConstructor::new);
-    public static final RegistryObject<Block> BLOCK_LIGHT = BLOCKS.register("block_light",() -> new Block(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> BLOCK_LIGHT = BLOCKS.register("block_light", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.SNOW)
             .lightLevel((e) -> 10)));
-    public static final RegistryObject<Block> BLOCK_LIGHT_RED = BLOCKS.register("block_light_red",() -> new Block(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> BLOCK_LIGHT_RED = BLOCKS.register("block_light_red", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.SNOW)
             .lightLevel((e) -> 10)));
-    public static final RegistryObject<Block> BLOCK_LIGHT_GREEN = BLOCKS.register("block_light_green",() -> new Block(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> BLOCK_LIGHT_GREEN = BLOCKS.register("block_light_green", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.SNOW)
             .lightLevel((e) -> 10)));
-    public static final RegistryObject<Block> BLOCK_LIGHT_BLUE = BLOCKS.register("block_light_blue",() -> new Block(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> BLOCK_LIGHT_BLUE = BLOCKS.register("block_light_blue", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.SNOW)
             .lightLevel((e) -> 10)));
-    public static final RegistryObject<Block> BLOCK_LIGHT_ORANGE = BLOCKS.register("block_light_orange",() -> new Block(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> BLOCK_LIGHT_ORANGE = BLOCKS.register("block_light_orange", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.SNOW)
             .lightLevel((e) -> 10)));
-    public static final RegistryObject<Block> BLOCK_LIGHT_PURPLE = BLOCKS.register("block_light_purple",() -> new Block(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> BLOCK_LIGHT_PURPLE = BLOCKS.register("block_light_purple", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.SNOW)
             .lightLevel((e) -> 10)));
-    public static final RegistryObject<Block> BLOCK_LIGHT_YELLOW = BLOCKS.register("block_light_yellow",() -> new Block(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> BLOCK_LIGHT_YELLOW = BLOCKS.register("block_light_yellow", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.SNOW)
             .lightLevel((e) -> 10)));
 

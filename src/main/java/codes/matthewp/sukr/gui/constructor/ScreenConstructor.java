@@ -12,9 +12,9 @@ import net.minecraft.network.chat.Component;
 public class ScreenConstructor extends Screen {
 
     private int buttonW;
-    private int buttonH = 20;
+    private final int buttonH = 20;
 
-    private BlockConstructorEntity entity;
+    private final BlockConstructorEntity entity;
 
     public ScreenConstructor(BlockConstructorEntity entity) {
         super(Component.literal("Constructor"));

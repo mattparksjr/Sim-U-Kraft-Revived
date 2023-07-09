@@ -3,6 +3,7 @@ package codes.matthewp.sukr.event;
 import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.data.SimDataManager;
 import codes.matthewp.sukr.data.folk.FolkNameData;
+import codes.matthewp.sukr.data.structure.StructureData;
 import codes.matthewp.sukr.entity.EntityFolk;
 import codes.matthewp.sukr.init.ItemInit;
 import codes.matthewp.sukr.net.PacketHandler;
@@ -13,8 +14,6 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -42,6 +41,7 @@ public class ForgeCommonEvents {
     @SubscribeEvent
     public static void dataReloadEvent(AddReloadListenerEvent event) {
         event.addListener(new FolkNameData());
+        event.addListener(new StructureData());
     }
 
     @SubscribeEvent
@@ -49,21 +49,5 @@ public class ForgeCommonEvents {
         if (event.phase == TickEvent.Phase.END) {
             TickHandler.handleTick(event.getServer());
         }
-    }
-
-    @SubscribeEvent
-    public static void onServerClosing(ServerStoppingEvent event) {
-        SimUKraft.LOGGER.debug("DEBUG DEBUG : " + event.getServer().overworld().getDayTime());
-    }
-
-    @SubscribeEvent
-    public static void onServerStarting(ServerStartingEvent event) {
-        SimUKraft.LOGGER.debug("DEBUG DEBUG : " + event.getServer().overworld().getDayTime());
-    }
-
-
-    @SubscribeEvent
-    public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        SimUKraft.LOGGER.debug("DEBUG DEBUG : " + event.getEntity().getServer().overworld().getDayTime());
     }
 }

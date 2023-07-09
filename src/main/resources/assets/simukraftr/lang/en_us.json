@@ -13,12 +13,13 @@
   "block.simukraftr.block_light_purple": "Sim-U-Light (purple)",
   "block.simukraftr.block_light_yellow": "Sim-U-Light (yellow)",
   "simukraftr.tab": "Sim-U-Kraft",
+  "key.category.simukraftr": "Sim-U-Kraft",
   "key.category.debug": "Debug",
   "simukraftr.message.gamemodeset": "Sim-U-Kraft - The gamemode has been set to: ",
   "simukraftr.message.survival": "survival",
   "simukraftr.message.creative": "creative",
   "simukraftr.message.dnrset": "Sim-U-Kraft - Sim-U-Kraft has been set to not run for this world.",
-  "simukraftr.text.homeless":  "Homeless",
+  "simukraftr.text.homeless": "Homeless",
   "simukraftr.gui.constructor.title": "Building Constructor",
   "simukraftr.gui.constructor.choosetask": "Please choose a task for this building constructor",
   "simukraftr.gui.constructor.choosefolk": "Please choose an unemployed folk you want to hire",
@@ -30,5 +31,6 @@
   "simukraftr.gui.gamemode.cdesc": "Have to supply no resources. Everything is free. Let your imagination run wild.",
   "simukraftr.gui.gamemode.survival": "Survival mode",
   "simukraftr.gui.gamemode.creative": "Creative mode",
-  "sounds.simukraft.constructor_activated": "[Building Constructor Activated]"
+  "sounds.simukraft.constructor_activated": "[Building Constructor Activated]",
+  "simukraftr.structure.nowoolstater": "No Wool Starter Home"
 }

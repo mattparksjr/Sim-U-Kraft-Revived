@@ -9,13 +9,11 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
 public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, HumanoidModel<EntityFolk>> {
@@ -28,7 +26,7 @@ public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, Humanoi
 
     @Override
     public void render(EntityFolk entityFolk, float p_115309_, float p_115310_, PoseStack stack, MultiBufferSource bufferSource, int p_115313_) {
-        if(entityFolk.getEntityData().get(EntityFolk.AGE) < 18) {
+        if (entityFolk.getEntityData().get(EntityFolk.AGE) < 18) {
             stack.scale(0.5F, 0.5F, 0.5F);
         }
         super.render(entityFolk, p_115309_, p_115310_, stack, bufferSource, p_115313_);
@@ -49,7 +47,7 @@ public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, Humanoi
             renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 1f, opacity, font, buf, packedLightCoords);
             renderLine(Component.literal("Folk job").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.75f, opacity, font, buf, packedLightCoords);
 
-            if(folk.getEntityData().get(EntityFolk.HOME).getY() == 999) {
+            if (folk.getEntityData().get(EntityFolk.HOME).getY() == 999) {
                 renderLine(Component.translatable("simukraftr.text.homeless").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.50f, opacity, font, buf, packedLightCoords);
             } else {
                 renderLine(Component.literal("Folk home").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.50f, opacity, font, buf, packedLightCoords);
