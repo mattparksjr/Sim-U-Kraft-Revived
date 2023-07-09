@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "simukraftr:block/block_controller",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "simukraftr:block/block_controller"
+    },
+    "facing=south": {
+      "model": "simukraftr:block/block_controller",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "simukraftr:block/block_controller",
+      "y": 270
+    }
+  }
+}

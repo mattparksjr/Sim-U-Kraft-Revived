@@ -53,6 +53,7 @@ public class StructureManager {
 
     public CompoundTag getBuildingNbt(String structureName) {
         try {
+            // Im not really sure if this is the best way to load these HELP NEEDED!
             ResourceLocation rl = new ResourceLocation(SimUKraft.MODID, "structure/" + structureName + ".nbt");
             InputStream rs = this.getClass().getClassLoader().
                     getResourceAsStream("data/" + rl.getNamespace() + "/" + rl.getPath());

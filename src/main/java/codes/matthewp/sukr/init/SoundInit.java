@@ -14,6 +14,7 @@ public class SoundInit {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, SimUKraft.MODID);
 
     public static final RegistryObject<SoundEvent> CONSTRUCTOR_ACTIVATED = registerSound("constructor_activated");
+    public static final RegistryObject<SoundEvent> CONTROLLER_BEEP = registerSound("controller_beep");
 
     public static final ForgeSoundType CONSTRUCTOR_SOUNDS = new ForgeSoundType(
             1f, 1.3f,
@@ -22,6 +23,15 @@ public class SoundInit {
             CONSTRUCTOR_ACTIVATED,
             () -> SoundEvents.WOOD_HIT,
             () -> SoundEvents.WOOD_FALL);
+
+    public static final ForgeSoundType CONTROLLER_SOUNDS = new ForgeSoundType(
+            1f, 1f,
+            () -> SoundEvents.WOOD_BREAK,
+            () -> SoundEvents.WOOD_STEP,
+            () -> SoundEvents.WOOD_BREAK,
+            () -> SoundEvents.WOOD_HIT,
+            () -> SoundEvents.WOOD_FALL);
+
 
     private static RegistryObject<SoundEvent> registerSound(String name) {
         ResourceLocation id = new ResourceLocation(SimUKraft.MODID, name);
