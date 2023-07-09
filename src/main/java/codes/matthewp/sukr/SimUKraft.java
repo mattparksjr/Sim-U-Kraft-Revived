@@ -36,6 +36,13 @@ public class SimUKraft {
             .displayItems((parameters, output) -> {
                 output.accept(ItemInit.ITEM_GAMEMODE.get());
                 output.accept(BlockInit.BLOCK_CONSTRUCTOR.get());
+                output.accept(BlockInit.BLOCK_LIGHT.get());
+                output.accept(BlockInit.BLOCK_LIGHT_RED.get());
+                output.accept(BlockInit.BLOCK_LIGHT_BLUE.get());
+                output.accept(BlockInit.BLOCK_LIGHT_GREEN.get());
+                output.accept(BlockInit.BLOCK_LIGHT_YELLOW.get());
+                output.accept(BlockInit.BLOCK_LIGHT_PURPLE.get());
+                output.accept(BlockInit.BLOCK_LIGHT_ORANGE.get());
             }).build());
 
     public SimUKraft() {
