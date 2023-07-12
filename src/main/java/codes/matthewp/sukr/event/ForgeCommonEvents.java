@@ -3,14 +3,19 @@ package codes.matthewp.sukr.event;
 import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.data.SimDataManager;
 import codes.matthewp.sukr.data.folk.FolkNameData;
+import codes.matthewp.sukr.data.player.PlayerDataProvider;
 import codes.matthewp.sukr.data.structure.StructureData;
 import codes.matthewp.sukr.entity.EntityFolk;
 import codes.matthewp.sukr.init.ItemInit;
 import codes.matthewp.sukr.net.PacketHandler;
 import codes.matthewp.sukr.net.packet.SyncGamemodeS2CPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -49,5 +54,24 @@ public class ForgeCommonEvents {
         if (event.phase == TickEvent.Phase.END) {
             TickHandler.handleTick(event.getServer());
         }
+    }
+
+    @SubscribeEvent
+    public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
+        if(event.getObject() instanceof Player) {
+            if(!event.getObject().getCapability(PlayerDataProvider.PLAYER_DATA).isPresent()) {
+                event.addCapability(new ResourceLocation(SimUKraft.MODID, "properties"), new PlayerDataProvider());
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerCloned(PlayerEvent.Clone event) {
+        event.getOriginal().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(oldStore -> {
+            event.getEntity().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(newStore -> {
+                newStore.copyFrom(oldStore);
+            });
+        });
+        event.getOriginal().invalidateCaps();
     }
 }

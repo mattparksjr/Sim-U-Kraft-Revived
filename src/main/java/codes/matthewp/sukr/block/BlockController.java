@@ -75,7 +75,7 @@ public class BlockController extends Block implements EntityBlock {
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
         if (level.isClientSide) {
-            player.playSound(SoundInit.CONTROLLER_BEEP.get());
+            player.playSound(SoundInit.CONTROLLER_BEEP.get(), 1f, 1f);
             // ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos));
         }
         return super.use(state, level, pos, player, hand, result);

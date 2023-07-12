@@ -1,6 +1,7 @@
 package codes.matthewp.sukr.event;
 
 import codes.matthewp.sukr.SimUKraft;
+import codes.matthewp.sukr.data.player.PlayerDataProvider;
 import codes.matthewp.sukr.util.KeyBinding;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -16,6 +17,9 @@ public class ForgeClientEvents {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
         if (KeyBinding.DEBUG_KEY.consumeClick()) {
+            Minecraft.getInstance().player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(data -> {
+                Minecraft.getInstance().player.sendSystemMessage(Component.literal("Data: " + data.getMoney()));
+            });
         }
     }
 

@@ -4,11 +4,12 @@ import codes.matthewp.sukr.data.folk.FolkData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class SimData {
 
     private int gamemode;
-    private List<FolkData> sims;
+    private List<UUID> sims;
 
     public SimData(int gamemode) {
         setGamemode(gamemode);
@@ -27,7 +28,7 @@ public class SimData {
         this.gamemode = gamemode;
     }
 
-    public List<FolkData> getFolks() {
+    public List<UUID> getFolks() {
         return sims;
     }
 }

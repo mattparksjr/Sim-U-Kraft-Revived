@@ -12,7 +12,6 @@ public class TickHandler {
             return;
         }
 
-
         //  SimUKraft.LOGGER.debug(new StructureManager().getBuildingBlocks(StructureData.getStructures().get(0), server.overworld()).get(0).getState().getBlock().getName().toString());
     }
 }
