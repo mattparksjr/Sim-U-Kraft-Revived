@@ -6,11 +6,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class
-SimDataManager extends SavedData {
+public class SimDataManager extends SavedData {
 
     private final SimData data = new SimData();
 
@@ -44,7 +44,7 @@ SimDataManager extends SavedData {
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
+    public @NotNull CompoundTag save(CompoundTag tag) {
         tag.putInt("gamemode", data.getGamemode());
         return tag;
     }

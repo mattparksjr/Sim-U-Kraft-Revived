@@ -25,7 +25,6 @@ public class ItemGamemodeSelect extends Item {
                 return InteractionResultHolder.consume(player.getItemInHand(hand));
             }
         }
-
         return InteractionResultHolder.fail(player.getItemInHand(hand));
     }
 

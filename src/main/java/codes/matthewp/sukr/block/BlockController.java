@@ -3,7 +3,6 @@ package codes.matthewp.sukr.block;
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
 import codes.matthewp.sukr.init.BlockEntityInit;
 import codes.matthewp.sukr.init.SoundInit;
-import codes.matthewp.sukr.util.ClientUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -74,10 +73,10 @@ public class BlockController extends Block implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
         if (level.isClientSide) {
             player.playSound(SoundInit.CONTROLLER_BEEP.get());
-           // ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos));
+            // ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos));
         }
         return super.use(state, level, pos, player, hand, result);
     }

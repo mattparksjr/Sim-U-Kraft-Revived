@@ -37,9 +37,14 @@ public class StructureData extends SimpleJsonResourceReloadListener {
         List<Structure> structureList = new ArrayList<>();
         for (Resource res : resourceManagerIn.getResourceStack(resourcelocation)) {
             try (InputStream is = res.open(); Reader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-                JsonObject jsonobject = GsonHelper.fromJson(GSON_INSTANCE, reader, JsonObject.class);
+                JsonObject json = GsonHelper.fromJson(GSON_INSTANCE, reader, JsonObject.class);
+                JsonArray structures = json.get("structures").getAsJsonArray();
+                boolean replace = json.get("replace").getAsBoolean();
 
-                JsonArray structures = jsonobject.get("structures").getAsJsonArray();
+                if (replace) {
+                    SimUKraft.LOGGER.info("Data pack {} has replaced all buildings.", res.sourcePackId());
+                    StructureData.structures.clear();
+                }
 
                 for (JsonElement structure : structures) {
                     JsonObject structureData = structure.getAsJsonObject();
