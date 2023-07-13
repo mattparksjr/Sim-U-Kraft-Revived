@@ -5,7 +5,10 @@ import codes.matthewp.sukr.data.player.PlayerDataProvider;
 import codes.matthewp.sukr.util.KeyBinding;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
@@ -25,8 +28,13 @@ public class ForgeClientEvents {
 
     @SubscribeEvent
     public static void onOverlay(RenderGuiOverlayEvent event) {
-        event.getGuiGraphics().drawString(Minecraft.getInstance().font, Component.literal("Day 1").withStyle(ChatFormatting.WHITE), 1, 1, 1);
-        event.getGuiGraphics().drawString(Minecraft.getInstance().font, Component.literal("Population 1").withStyle(ChatFormatting.WHITE), 1, 11, 1);
-        event.getGuiGraphics().drawString(Minecraft.getInstance().font, Component.literal("Credits: 20.0").withStyle(ChatFormatting.WHITE), 1, 21, 1);
+        event.getGuiGraphics().drawString(Minecraft.getInstance().font, Component.literal(I18n.get("simukraftr.gui.overlay.day", 1)).withStyle(ChatFormatting.WHITE), 1, 1, 1);
+        event.getGuiGraphics().drawString(Minecraft.getInstance().font, Component.literal(I18n.get("simukraftr.gui.overlay.population", 1)).withStyle(ChatFormatting.WHITE), 1, 11, 1);
+
+        Minecraft.getInstance().player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(data ->
+                event.getGuiGraphics().drawString(
+                        Minecraft.getInstance().font,
+                        Component.literal(I18n.get("simukraftr.gui.overlay.credits", data.getMoney())).withStyle(ChatFormatting.WHITE),
+                        1, 21, 1));
     }
 }
