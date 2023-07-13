@@ -43,6 +43,7 @@ public class SimUKraft {
                 output.accept(BlockInit.BLOCK_LIGHT_YELLOW.get());
                 output.accept(BlockInit.BLOCK_LIGHT_PURPLE.get());
                 output.accept(BlockInit.BLOCK_LIGHT_ORANGE.get());
+                output.accept(BlockInit.BLOCK_LIGHT_RAINBOW.get());
             }).build());
 
     public SimUKraft() {

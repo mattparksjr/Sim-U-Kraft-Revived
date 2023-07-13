@@ -39,6 +39,10 @@ public class BlockInit {
             .mapColor(MapColor.SNOW)
             .lightLevel((e) -> 10)));
 
+    public static final RegistryObject<Block> BLOCK_LIGHT_RAINBOW = BLOCKS.register("block_light_rainbow", () -> new Block(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.SNOW)
+            .lightLevel((e) -> 10)));
+
 
     public static final RegistryObject<Item> BLOCK_CONSTRUCTOR_ITEM = ItemInit.ITEMS.register("block_constructor", () -> new BlockItem(BLOCK_CONSTRUCTOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> BLOCK_CONTROLLER_ITEM = ItemInit.ITEMS.register("block_controller", () -> new BlockItem(BLOCK_CONTROLLER.get(), new Item.Properties()));
@@ -49,4 +53,5 @@ public class BlockInit {
     public static final RegistryObject<Item> BLOCK_LIGHT_ITEM_ORANGE = ItemInit.ITEMS.register("block_light_orange", () -> new BlockItem(BLOCK_LIGHT_ORANGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> BLOCK_LIGHT_ITEM_PURPLE = ItemInit.ITEMS.register("block_light_purple", () -> new BlockItem(BLOCK_LIGHT_PURPLE.get(), new Item.Properties()));
     public static final RegistryObject<Item> BLOCK_LIGHT_ITEM_YELLOW = ItemInit.ITEMS.register("block_light_yellow", () -> new BlockItem(BLOCK_LIGHT_YELLOW.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOCK_LIGHT_ITEM_RAINBOW = ItemInit.ITEMS.register("block_light_rainbow", () -> new BlockItem(BLOCK_LIGHT_RAINBOW.get(), new Item.Properties()));
 }
