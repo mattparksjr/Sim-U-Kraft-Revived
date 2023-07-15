@@ -1,10 +1,7 @@
 package codes.matthewp.sukr.net;
 
 import codes.matthewp.sukr.SimUKraft;
-import codes.matthewp.sukr.net.packet.ExampleC2SPacket;
-import codes.matthewp.sukr.net.packet.GamemodeCheckC2SPacket;
-import codes.matthewp.sukr.net.packet.SetGamemodeC2SPacket;
-import codes.matthewp.sukr.net.packet.SyncGamemodeS2CPacket;
+import codes.matthewp.sukr.net.packet.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -49,6 +46,11 @@ public class PacketHandler {
                 .decoder(SetGamemodeC2SPacket::new)
                 .encoder(SetGamemodeC2SPacket::toBytes)
                 .consumerMainThread(SetGamemodeC2SPacket::handle)
+                .add();
+        INSTANCE.messageBuilder(FolkSpawnedS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(FolkSpawnedS2CPacket::new)
+                .encoder(FolkSpawnedS2CPacket::toBytes)
+                .consumerMainThread(FolkSpawnedS2CPacket::handle)
                 .add();
     }
 

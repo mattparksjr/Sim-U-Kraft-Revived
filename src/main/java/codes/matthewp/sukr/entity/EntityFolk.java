@@ -98,6 +98,10 @@ public class EntityFolk extends AgeableMob {
         return super.finalizeSpawn(levelAccessor, difficulty, type, spawnData, tag);
     }
 
+    public String getFullname() {
+        return this.entityData.get(FIRST_NAME) + " " + this.entityData.get(LAST_NAME);
+    }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));

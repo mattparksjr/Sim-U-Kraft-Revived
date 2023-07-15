@@ -29,6 +29,7 @@ public class ForgeCommonEvents {
 
     @SubscribeEvent
     public static void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
+        if(event.getEntity().level().isClientSide) return;
         PacketHandler.sendToPlayer(new SyncGamemodeS2CPacket(SimDataManager.get(event.getEntity().getServer().overworld()).getGamemode(), false), (ServerPlayer) event.getEntity());
         if (SimDataManager.get(event.getEntity().getServer().overworld()).getGamemode() == -1) {
             ItemHandlerHelper.giveItemToPlayer(event.getEntity(), new ItemStack(ItemInit.ITEM_GAMEMODE.get()));

@@ -18,6 +18,7 @@ public class SimData {
 
     public SimData() {
         setGamemode(-1);
+        sims = new ArrayList<>();
     }
 
     public int getGamemode() {
