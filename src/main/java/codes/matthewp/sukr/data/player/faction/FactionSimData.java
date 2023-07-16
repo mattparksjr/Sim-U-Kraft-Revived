@@ -1,6 +1,8 @@
 package codes.matthewp.sukr.data.player.faction;
 
+import codes.matthewp.sukr.entity.EntityFolk;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -45,5 +47,16 @@ public class FactionSimData {
 
     public void addFolk(UUID uuid) {
         folks.add(uuid);
+    }
+
+    public List<EntityFolk> getUnemployedFolks(ServerLevel level) {
+        List<EntityFolk> folks = new ArrayList<>();
+        for(UUID uuid : getFolks()) {
+            EntityFolk folk = (EntityFolk) level.getEntity(uuid);
+            if(folk != null && folk.getEntityData().get(EntityFolk.JOB_SITE).getY() != 999) {
+                folks.add(folk);
+            }
+        }
+        return folks;
     }
 }

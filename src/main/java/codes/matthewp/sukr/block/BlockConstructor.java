@@ -43,9 +43,9 @@ public class BlockConstructor extends Block implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
         if (level.isClientSide) {
-            ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos));
+            ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos), player);
         }
         return super.use(state, level, pos, player, hand, result);
     }

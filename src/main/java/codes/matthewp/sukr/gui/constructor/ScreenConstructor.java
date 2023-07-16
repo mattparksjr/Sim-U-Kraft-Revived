@@ -8,36 +8,40 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class ScreenConstructor extends Screen {
 
     private int buttonW;
     private final int buttonH = 20;
 
-    private final BlockConstructorEntity entity;
+    private static BlockConstructorEntity entity;
+    private static Player player;
 
-    public ScreenConstructor(BlockConstructorEntity entity) {
+    public ScreenConstructor(BlockConstructorEntity entity, Player player) {
         super(Component.literal("Constructor"));
-        this.entity = entity;
+        ScreenConstructor.entity = entity;
+        ScreenConstructor.player = player;
     }
 
     @Override
     protected void init() {
         super.init();
-        buttonW = Math.min(200, (width - 20) / 3);
+        buttonW = Math.min(150, (width - 20) / 3);
 
-        this.addRenderableWidget(new Button.Builder(Component.literal("Done"), ScreenConstructor::pressDone).size(40, buttonH).pos(5, 5).build());
+        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.button.done"), ScreenConstructor::pressDone).size(40, buttonH).pos(5, 5).build());
 
-        this.addRenderableWidget(new Button.Builder(Component.literal("Hire builder"), ScreenConstructor::pressHire).size(buttonW, buttonH).pos((width - 20) / 3 - buttonW + 10, height / 2).build());
-        this.addRenderableWidget(new Button.Builder(Component.literal("Choose building"), ScreenConstructor::pressBuild).size(buttonW, buttonH).pos((width - 20) / 3 + 10, height / 2).build());
-        this.addRenderableWidget(new Button.Builder(Component.literal("Fire worker"), ScreenConstructor::pressFire).size(buttonW, buttonH).pos((width - 20) / 3 + buttonW + 10, height / 2).build());
-        this.addRenderableWidget(new Button.Builder(Component.literal("Hire terraformer"), ScreenConstructor::pressTerraform).size(buttonW, buttonH).pos((width - 20) / 3 - buttonW + 10, height / 2 + buttonH).build());
-        this.addRenderableWidget(new Button.Builder(Component.literal("Terraform area"), ScreenConstructor::pressTerraformArea).size(buttonW, buttonH).pos((width - 20) / 3 + 10, height / 2 + buttonH).build());
-        this.addRenderableWidget(new Button.Builder(Component.literal("Show employees"), ScreenConstructor::pressShowEmployees).size(buttonW, buttonH).pos((width - 20) / 3 + buttonW + 10, height / 2 + buttonH).build());
+        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.hire"), ScreenConstructor::pressHire).size(buttonW, buttonH).pos((width - 20) / 3 - buttonW + 10, height / 2).build());
+        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.title"), ScreenConstructor::pressBuild).size(buttonW, buttonH).pos((width - 20) / 3 + 10, height / 2).build());
+        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.fire"), ScreenConstructor::pressFire).size(buttonW, buttonH).pos((width - 20) / 3 + buttonW + 10, height / 2).build());
+        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.terraformer"), ScreenConstructor::pressTerraform).size(buttonW, buttonH).pos((width - 20) / 3 - buttonW + 10, height / 2 + buttonH).build());
+        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.terraform"), ScreenConstructor::pressTerraformArea).size(buttonW, buttonH).pos((width - 20) / 3 + 10, height / 2 + buttonH).build());
+        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.showemp"), ScreenConstructor::pressShowEmployees).size(buttonW, buttonH).pos((width - 20) / 3 + buttonW + 10, height / 2 + buttonH).build());
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(graphics);
         for (int i = 0; i <= 6; i++) {
             ((Button) this.renderables.get(i)).visible = true;
@@ -62,6 +66,7 @@ public class ScreenConstructor extends Screen {
 
     private static void pressHire(Button button) {
         Minecraft.getInstance().setScreen(null);
+        Minecraft.getInstance().setScreen(new ScreenHireBuilder(entity, player));
     }
 
     private static void pressBuild(Button button) {

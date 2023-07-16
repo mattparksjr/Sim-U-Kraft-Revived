@@ -4,6 +4,7 @@ import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
 import codes.matthewp.sukr.gui.ScreenGamemode;
 import codes.matthewp.sukr.gui.constructor.ScreenConstructor;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 
 public class ClientUtil {
 
@@ -11,7 +12,7 @@ public class ClientUtil {
         Minecraft.getInstance().setScreen(new ScreenGamemode());
     }
 
-    public static void showConstructor(BlockConstructorEntity entity) {
-        Minecraft.getInstance().setScreen(new ScreenConstructor(entity));
+    public static void showConstructor(BlockConstructorEntity entity, Player player) {
+        Minecraft.getInstance().setScreen(new ScreenConstructor(entity, player));
     }
 }
