@@ -2,6 +2,7 @@ package codes.matthewp.sukr.event;
 
 import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.data.SimDataManager;
+import codes.matthewp.sukr.data.player.faction.Faction;
 import codes.matthewp.sukr.entity.EntityFolk;
 import codes.matthewp.sukr.init.EntityInit;
 import net.minecraft.client.resources.language.I18n;
@@ -19,28 +20,40 @@ import java.util.Random;
 public class TickHandler {
 
     public static void handleTick(MinecraftServer server) {
-        if (SimDataManager.get(server.overworld()).getGamemode() == 0 || SimDataManager.get(server.overworld()).getGamemode() == -1) {
+        SimDataManager simData = SimDataManager.get(server.overworld());
+        if (simData.getGamemode() == 0 || simData.getGamemode() == -1) {
             return;
         }
 
-        // TODO: shouldSpawnNewFolk()
-        if (SimDataManager.get(server.overworld()).getData().getFolks().size() == 0) {
-            summonNewFolk(server);
+        for(Faction faction : simData.getData().getFactions()) {
+            if(shouldSpawnNewFolk(server.overworld(), faction)) {
+                summonNewFolk(server, faction);
+            }
         }
-
         //  SimUKraft.LOGGER.debug(new StructureManager().getBuildingBlocks(StructureData.getStructures().get(0), server.overworld()).get(0).getState().getBlock().getName().toString());
     }
 
-    private static void summonNewFolk(MinecraftServer server) {
+    private static void summonNewFolk(MinecraftServer server, Faction faction) {
         Random random = new Random();
-        if(server.overworld().players().isEmpty()) return;
-        // TODO: This will be based on teams
-        ServerPlayer player = server.overworld().players().get(random.nextInt(server.overworld().players().size()));
+        ServerLevel level = server.overworld();
+        if(level.players().isEmpty()) return;
+
+        ServerPlayer player = faction.getFirstOnline(level);
         int x = (random.nextInt(2) == 1) ? player.getBlockX() + random.nextInt(25) : player.getBlockX() - random.nextInt(25);
         int z = (random.nextInt(2) == 1) ? player.getBlockZ() + random.nextInt(25) : player.getBlockZ() - random.nextInt(25);
-        BlockPos pos = server.overworld().getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, 0, z));
+        BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, 0, z));
 
-        EntityFolk folk = EntityInit.FOLK.get().spawn(server.overworld(), pos, MobSpawnType.NATURAL);
-        SimDataManager.get(server.overworld()).addFolk(folk);
+        EntityFolk folk = EntityInit.FOLK.get().spawn(level, pos, MobSpawnType.NATURAL);
+        if(folk != null) {
+            SimDataManager.get(server.overworld()).addFolk(faction, folk);
+        } else {
+            SimUKraft.LOGGER.error("Failed to spawn a new folk at: " + pos.toShortString());
+        }
+    }
+
+    private static boolean shouldSpawnNewFolk(ServerLevel level, Faction faction) {
+        if(!faction.isOnline(level)) return false;
+        if(faction.getData().getFolks().isEmpty()) return true;
+        return false;
     }
 }

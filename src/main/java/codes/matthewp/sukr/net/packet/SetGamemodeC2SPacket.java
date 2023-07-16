@@ -25,7 +25,7 @@ public class SetGamemodeC2SPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            SimDataManager.get(supplier.get().getSender().getServer().overworld()).setGamemode(gamemode, true);
+            SimDataManager.get(context.getSender().getServer().overworld()).setGamemode(gamemode, true);
         });
         return true;
     }

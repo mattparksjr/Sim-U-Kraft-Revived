@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlayerDataProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
 
-    public static Capability<PlayerData> PLAYER_DATA = CapabilityManager.get(new CapabilityToken<PlayerData>() {
+    public static Capability<PlayerData> PLAYER_DATA = CapabilityManager.get(new CapabilityToken<>() {
     });
 
     private PlayerData data = null;
@@ -24,7 +24,6 @@ public class PlayerDataProvider implements ICapabilityProvider, INBTSerializable
         if (this.data == null) {
             this.data = new PlayerData();
         }
-
         return this.data;
     }
 

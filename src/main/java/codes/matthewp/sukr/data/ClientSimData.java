@@ -1,5 +1,7 @@
 package codes.matthewp.sukr.data;
 
+import codes.matthewp.sukr.SimUKraft;
+import codes.matthewp.sukr.data.player.faction.Faction;
 import codes.matthewp.sukr.entity.EntityFolk;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
@@ -12,8 +14,7 @@ import java.util.UUID;
 public class ClientSimData {
 
     private static int gamemode;
-    private static List<UUID> sims;
-
+    private static Faction faction;
 
     public static int getGamemode() {
         return gamemode;
@@ -32,16 +33,18 @@ public class ClientSimData {
         }
     }
 
-    public static List<UUID> getSims() {
-        return sims;
+    public static void addSim(int id) {
+        EntityFolk folk = (EntityFolk) Minecraft.getInstance().level.getEntity(id);
+        faction.getData().getFolks().add(folk.getUUID());
+        Minecraft.getInstance().player.sendSystemMessage(Component.literal(I18n.get("simukraftr.message.folkspawned", folk.getFullname())));
     }
 
-    public static void addSim(int id) {
-        if(sims == null)
-            sims = new ArrayList<>();
+    public static Faction getFaction() {
+        return faction;
+    }
 
-        EntityFolk folk = (EntityFolk) Minecraft.getInstance().level.getEntity(id);
-        sims.add(folk.getUUID());
-        Minecraft.getInstance().player.sendSystemMessage(Component.literal(I18n.get("simukraftr.message.folkspawned", folk.getFullname())));
+    public static void setFaction(Faction newFaction) {
+        SimUKraft.LOGGER.debug("CLIENT - WE HAVE BEEN TOLD OUR FACTION IS: "  +newFaction.getFactionID() + " ---- " + newFaction.getFactionOwner());
+        ClientSimData.faction = newFaction;
     }
 }

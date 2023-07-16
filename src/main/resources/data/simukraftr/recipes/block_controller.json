@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "catagory": "misc",
+  "pattern": [
+    "PPP",
+    "CWC",
+    "CCC"
+  ],
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "W": {
+      "item": "minecraft:crafting_table"
+    },
+    "C": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "result": {
+    "item": "simukraftr:block_constructor"
+  }
+}

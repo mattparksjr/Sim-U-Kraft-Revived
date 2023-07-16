@@ -52,6 +52,16 @@ public class PacketHandler {
                 .encoder(FolkSpawnedS2CPacket::toBytes)
                 .consumerMainThread(FolkSpawnedS2CPacket::handle)
                 .add();
+        INSTANCE.messageBuilder(CreateFactionC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(CreateFactionC2SPacket::new)
+                .encoder(CreateFactionC2SPacket::toBytes)
+                .consumerMainThread(CreateFactionC2SPacket::handle)
+                .add();
+        INSTANCE.messageBuilder(FactionAddedS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(FactionAddedS2CPacket::new)
+                .encoder(FactionAddedS2CPacket::toBytes)
+                .consumerMainThread(FactionAddedS2CPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG msg) {
