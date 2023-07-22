@@ -10,6 +10,7 @@ import codes.matthewp.sukr.net.packet.SyncGamemodeS2CPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 import org.jetbrains.annotations.NotNull;
@@ -52,10 +53,12 @@ public class SimDataManager extends SavedData {
         PacketHandler.sendToAllPlayers(new SyncGamemodeS2CPacket(gamemode, announce));
     }
 
-    public void addFolk(Faction faction, EntityFolk folk) {
-        faction.getData().addFolk(folk.getUUID());
+    public void addFolk(ServerLevel level, Faction faction, EntityFolk folk) {
+        faction.getData().addFolk(folk);
         setDirty();
-        PacketHandler.sendToAllPlayers(new FolkSpawnedS2CPacket(folk.getId()));
+        for(ServerPlayer player : faction.getOnlinePlayers(level)) {
+            PacketHandler.sendToPlayer(new FolkSpawnedS2CPacket(folk.getId()), player);
+        }
     }
 
     public void addFaction(Faction faction, ServerPlayer player) {

@@ -44,6 +44,7 @@ public class BlockConstructor extends Block implements EntityBlock {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
+        // TODO: TEST IF ITS NOT SET UP YET (RARE)
         if (level.isClientSide) {
             ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos), player);
         }

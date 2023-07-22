@@ -95,6 +95,7 @@ public class EntityFolk extends AgeableMob {
         this.entityData.set(LEVEL_BUILDING, data.skillBuild);
         this.entityData.set(LEVEL_MINING, data.skillMine);
         this.entityData.set(LEVEL_SOLIDER, data.skillSoldier);
+        this.entityData.set(JOB_SITE, new BlockPos(0, 999, 0));
         return super.finalizeSpawn(levelAccessor, difficulty, type, spawnData, tag);
     }
 

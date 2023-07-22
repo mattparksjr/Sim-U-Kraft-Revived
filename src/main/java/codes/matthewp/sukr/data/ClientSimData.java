@@ -7,10 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 public class ClientSimData {
 
     private static int gamemode;
@@ -34,9 +30,11 @@ public class ClientSimData {
     }
 
     public static void addSim(int id) {
-        EntityFolk folk = (EntityFolk) Minecraft.getInstance().level.getEntity(id);
-        faction.getData().getFolks().add(folk.getUUID());
-        Minecraft.getInstance().player.sendSystemMessage(Component.literal(I18n.get("simukraftr.message.folkspawned", folk.getFullname())));
+        if (Minecraft.getInstance().level.getEntity(id) != null) {
+            EntityFolk folk = (EntityFolk) Minecraft.getInstance().level.getEntity(id);
+            faction.getData().addFolk(folk);
+            Minecraft.getInstance().player.sendSystemMessage(Component.literal(I18n.get("simukraftr.message.folkspawned", folk.getFullname())));
+        }
     }
 
     public static Faction getFaction() {
@@ -44,7 +42,7 @@ public class ClientSimData {
     }
 
     public static void setFaction(Faction newFaction) {
-        SimUKraft.LOGGER.debug("CLIENT - WE HAVE BEEN TOLD OUR FACTION IS: "  +newFaction.getFactionID() + " ---- " + newFaction.getFactionOwner());
+        SimUKraft.LOGGER.debug("CLIENT - WE HAVE BEEN TOLD OUR FACTION IS: " + newFaction.getFactionID() + " ---- " + newFaction.getFactionOwner());
         ClientSimData.faction = newFaction;
     }
 }

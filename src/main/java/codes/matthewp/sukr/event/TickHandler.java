@@ -45,7 +45,7 @@ public class TickHandler {
 
         EntityFolk folk = EntityInit.FOLK.get().spawn(level, pos, MobSpawnType.NATURAL);
         if(folk != null) {
-            SimDataManager.get(server.overworld()).addFolk(faction, folk);
+            SimDataManager.get(server.overworld()).addFolk(server.overworld(), faction, folk);
         } else {
             SimUKraft.LOGGER.error("Failed to spawn a new folk at: " + pos.toShortString());
         }

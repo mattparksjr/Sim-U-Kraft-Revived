@@ -38,7 +38,7 @@ public class ScreenHireBuilder extends Screen {
                 ScreenHireBuilder::pressCancel).size((width - 20) / 2, buttonH).pos(width / 2, height - (20 + buttonH)).build());
 
         player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
-            for(EntityFolk folk : ClientSimData.getFaction().getData().getUnemployedFolks((ServerLevel) player.level())) {
+            for(EntityFolk folk : ClientSimData.getFaction().getData().getUnemployedFolks()) {
                 this.addRenderableWidget(new Button.Builder(Component.literal(folk.getFullname()), ScreenHireBuilder::pressDone).size(buttonW, buttonH).pos(5, height / 3 + 50).build());
             }
         });

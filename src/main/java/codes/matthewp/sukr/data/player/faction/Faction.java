@@ -57,6 +57,24 @@ public class Faction {
     }
 
     /**
+     * Get a list of all players who are currently online
+     * @param level ServerLevel the world
+     * @return List of online players
+     */
+    public List<ServerPlayer> getOnlinePlayers(ServerLevel level) {
+        List<ServerPlayer> online = new ArrayList<>();
+
+        if(isPlayerOnline(level, getFactionOwner()))
+            online.add((ServerPlayer) level.getEntity(getFactionOwner()));
+
+        for(UUID uuid : getPlayers()) {
+            if((uuid != getFactionOwner()) && isPlayerOnline(level, uuid))
+                online.add((ServerPlayer) level.getEntity(uuid));
+        }
+        return online;
+    }
+
+    /**
      * Check if any player in the faction is online :)
      *
      * @param level The level to check
@@ -65,16 +83,26 @@ public class Faction {
     public boolean isOnline(ServerLevel level) {
         boolean found = false;
         for (UUID uuid : getPlayers()) {
-            if (level.getEntity(uuid) != null) {
+            if (isPlayerOnline(level, uuid)) {
                 found = true;
             }
         }
 
-        if (level.getEntity(getFactionOwner()) != null) {
+        if (isPlayerOnline(level, getFactionOwner())) {
             found = true;
         }
 
         return found;
+    }
+
+    /**
+     * Check if a specific player is online.
+     * @param level ServerLevel servers level
+     * @param uuid UUID players uuid
+     * @return true if player is online
+     */
+    public boolean isPlayerOnline(ServerLevel level, UUID uuid) {
+        return level.getEntity(uuid) != null;
     }
 
     public void load(CompoundTag tag) {
