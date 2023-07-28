@@ -6,11 +6,10 @@ import codes.matthewp.sukr.entity.EntityFolk;
 import codes.matthewp.sukr.net.PacketHandler;
 import codes.matthewp.sukr.net.packet.FactionAddedS2CPacket;
 import codes.matthewp.sukr.net.packet.FolkSpawnedS2CPacket;
-import codes.matthewp.sukr.net.packet.SyncGamemodeS2CPacket;
+import codes.matthewp.sukr.net.packet.sync.SyncGamemodeS2CPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class SimDataManager extends SavedData {
 

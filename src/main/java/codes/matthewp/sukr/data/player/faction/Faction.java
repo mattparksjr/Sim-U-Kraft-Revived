@@ -2,6 +2,7 @@ package codes.matthewp.sukr.data.player.faction;
 
 import codes.matthewp.sukr.SimUKraft;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
@@ -126,6 +127,27 @@ public class Faction {
         }
         tag = getData().save(tag);
         return tag;
+    }
+
+    public void writeToBuf(FriendlyByteBuf buf) {
+        buf.writeUtf(getName());
+        buf.writeUUID(getFactionID());
+        buf.writeUUID(getFactionOwner());
+        buf.writeInt(getPlayers().size());
+        for (int i = 0; i < getPlayers().size(); i++) {
+            buf.writeUUID(getPlayers().get(i));
+        }
+        getData().writeToBuf(buf);
+    }
+
+    public static Faction readFromBuf(FriendlyByteBuf buf) {
+        Faction faction = new Faction(buf.readUtf(), buf.readUUID());
+        faction.setFactionOwner(buf.readUUID());
+        for (int i = 0; i < buf.readInt(); i++) {
+            faction.getPlayers().add(buf.readUUID());
+        }
+        faction.setData(FactionSimData.readFromBuf(buf));
+        return faction;
     }
 
     public void setName(String name) {

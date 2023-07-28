@@ -2,6 +2,10 @@ package codes.matthewp.sukr.net;
 
 import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.net.packet.*;
+import codes.matthewp.sukr.net.packet.gui.ShowHireBuilderS2CPacket;
+import codes.matthewp.sukr.net.packet.sync.RequestFactionDataC2SPacket;
+import codes.matthewp.sukr.net.packet.sync.SyncFactionS2CPacket;
+import codes.matthewp.sukr.net.packet.sync.SyncGamemodeS2CPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -61,6 +65,16 @@ public class PacketHandler {
                 .decoder(FactionAddedS2CPacket::new)
                 .encoder(FactionAddedS2CPacket::toBytes)
                 .consumerMainThread(FactionAddedS2CPacket::handle)
+                .add();
+        INSTANCE.messageBuilder(SyncFactionS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(SyncFactionS2CPacket::new)
+                .encoder(SyncFactionS2CPacket::toBytes)
+                .consumerMainThread(SyncFactionS2CPacket::handle)
+                .add();
+        INSTANCE.messageBuilder(RequestFactionDataC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(RequestFactionDataC2SPacket::new)
+                .encoder(RequestFactionDataC2SPacket::toBytes)
+                .consumerMainThread(RequestFactionDataC2SPacket::handle)
                 .add();
     }
 

@@ -9,7 +9,7 @@ import codes.matthewp.sukr.data.structure.StructureData;
 import codes.matthewp.sukr.entity.EntityFolk;
 import codes.matthewp.sukr.init.ItemInit;
 import codes.matthewp.sukr.net.PacketHandler;
-import codes.matthewp.sukr.net.packet.SyncGamemodeS2CPacket;
+import codes.matthewp.sukr.net.packet.sync.SyncGamemodeS2CPacket;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.resources.ResourceLocation;
@@ -37,6 +37,8 @@ public class ForgeCommonEvents {
     public static void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity().level().isClientSide) return;
         PacketHandler.sendToPlayer(new SyncGamemodeS2CPacket(SimDataManager.get(event.getEntity().getServer().overworld()).getGamemode(), false), (ServerPlayer) event.getEntity());
+
+        // maybe a hash map for player uuid -> faction uuid, or brute force search
 
         if (SimDataManager.get(event.getEntity().getServer().overworld()).getGamemode() == -1) {
             if (!event.getEntity().getInventory().hasAnyOf(Set.of(ItemInit.ITEM_GAMEMODE.get()))) {

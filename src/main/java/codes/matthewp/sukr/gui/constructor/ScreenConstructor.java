@@ -2,6 +2,8 @@ package codes.matthewp.sukr.gui.constructor;
 
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
 import codes.matthewp.sukr.gui.ScreenGamemode;
+import codes.matthewp.sukr.net.PacketHandler;
+import codes.matthewp.sukr.net.packet.sync.RequestFactionDataC2SPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -66,7 +68,7 @@ public class ScreenConstructor extends Screen {
 
     private static void pressHire(Button button) {
         Minecraft.getInstance().setScreen(null);
-        Minecraft.getInstance().setScreen(new ScreenHireBuilder(entity, player));
+        PacketHandler.sendToServer(new RequestFactionDataC2SPacket());
     }
 
     private static void pressBuild(Button button) {

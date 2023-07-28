@@ -1,4 +1,4 @@
-package codes.matthewp.sukr.net.packet;
+package codes.matthewp.sukr.net.packet.sync;
 
 import codes.matthewp.sukr.data.ClientSimData;
 import net.minecraft.network.FriendlyByteBuf;

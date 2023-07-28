@@ -2,6 +2,7 @@ package codes.matthewp.sukr.net.packet;
 
 import codes.matthewp.sukr.data.SimDataManager;
 import codes.matthewp.sukr.net.PacketHandler;
+import codes.matthewp.sukr.net.packet.sync.SyncGamemodeS2CPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

@@ -17,15 +17,19 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScreenHireBuilder extends Screen {
 
-    private static BlockConstructorEntity entity;
-    private static Player player;
+   // private static BlockConstructorEntity entity;
+  //  private static Player player;
     private final int buttonH = 20;
     private final int buttonW = 100;
 
     public ScreenHireBuilder(BlockConstructorEntity entity, Player player) {
         super(Component.literal("Constructor"));
-        ScreenHireBuilder.entity = entity;
-        ScreenHireBuilder.player = player;
+       // ScreenHireBuilder.entity = entity;
+//.player = player;
+    }
+
+    public ScreenHireBuilder() {
+        super(Component.literal("Constructor"));
     }
 
     @Override
@@ -37,7 +41,7 @@ public class ScreenHireBuilder extends Screen {
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.ok"),
                 ScreenHireBuilder::pressCancel).size((width - 20) / 2, buttonH).pos(width / 2, height - (20 + buttonH)).build());
 
-        player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
+        Minecraft.getInstance().player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
             for(EntityFolk folk : ClientSimData.getFaction().getData().getUnemployedFolks()) {
                 this.addRenderableWidget(new Button.Builder(Component.literal(folk.getFullname()), ScreenHireBuilder::pressDone).size(buttonW, buttonH).pos(5, height / 3 + 50).build());
             }
@@ -61,6 +65,6 @@ public class ScreenHireBuilder extends Screen {
     }
 
     private static void pressCancel(Button button) {
-        Minecraft.getInstance().setScreen(new ScreenConstructor(entity, player));
+      //  Minecraft.getInstance().setScreen(new ScreenConstructor(entity, player));
     }
 }

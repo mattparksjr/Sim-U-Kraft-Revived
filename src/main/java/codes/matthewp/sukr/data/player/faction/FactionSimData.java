@@ -5,6 +5,7 @@ import codes.matthewp.sukr.entity.EntityFolk;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,6 +44,21 @@ public class FactionSimData {
         }
         setFolks(folks);
         return this;
+    }
+
+    public void writeToBuf(FriendlyByteBuf buf) {
+        buf.writeInt(getFolks().size());
+        for (int i = 0; i < getFolks().size(); i++) {
+            buf.writeUUID(getFolks().get(i));
+        }
+    }
+
+    public static FactionSimData readFromBuf(FriendlyByteBuf buf) {
+        FactionSimData data = new FactionSimData();
+        for (int i = 0; i < buf.readInt(); i++) {
+            data.getFolks().add(buf.readUUID());
+        }
+        return data;
     }
 
     public List<UUID> getFolks() {
