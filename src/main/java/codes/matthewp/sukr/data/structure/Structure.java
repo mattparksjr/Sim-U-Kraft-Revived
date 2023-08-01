@@ -3,11 +3,8 @@ package codes.matthewp.sukr.data.structure;
 public class Structure {
 
     private String id;
-
     private String name;
-
     private StructureCategory category;
-
     private String file;
 
     public Structure(String id, String name, StructureCategory category, String file) {

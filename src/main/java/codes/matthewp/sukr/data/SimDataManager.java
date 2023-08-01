@@ -75,8 +75,10 @@ public class SimDataManager extends SavedData {
         tag.putInt("gamemode", data.getGamemode());
         tag.putInt("numfactions", data.getFactions().size());
         for (int i = 0; i < data.getFactions().size(); i++) {
+            CompoundTag facTag = tag.getCompound("faction." + i);
             Faction faction = data.getFactions().get(i);
-            faction.save(tag.getCompound("faction." + i));
+            faction.save(facTag);
+            tag.put("faction." + i, facTag);
         }
         return tag;
     }

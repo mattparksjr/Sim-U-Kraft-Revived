@@ -29,14 +29,6 @@ public class FactionSimData {
         clientEntityIDs = new HashMap<>();
     }
 
-    public CompoundTag save(@NotNull CompoundTag tag) {
-        tag.putInt("numfolks", getFolks().size());
-        for (int i = 0; i < getFolks().size(); i++) {
-            tag.putUUID("folks." + i, getFolks().get(i));
-        }
-        return tag;
-    }
-
     public FactionSimData load(CompoundTag tag) {
         List<UUID> folks = new ArrayList<>();
         for (int i = 0; i < tag.getInt("numfolks"); i++) {

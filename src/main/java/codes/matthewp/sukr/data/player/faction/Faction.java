@@ -4,13 +4,9 @@ import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.entity.EntityFolk;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.levelgen.WorldDimensions;
-import net.minecraftforge.event.server.ServerLifecycleEvent;
 import net.minecraftforge.server.ServerLifecycleHooks;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -124,15 +120,18 @@ public class Faction {
         setData(new FactionSimData().load(tag));
     }
 
-    public @NotNull CompoundTag save(CompoundTag tag) {
+    public void save(CompoundTag tag) {
         tag.putString("name", getName());
         tag.putUUID("uuid", getFactionID());
         tag.putUUID("owner", getFactionOwner());
+        tag.putInt("membersize", getPlayers().size());
         for (int i = 0; i < getPlayers().size(); i++) {
             tag.putUUID("member." + i, getPlayers().get(i));
         }
-        tag = getData().save(tag);
-        return tag;
+        tag.putInt("numfolks", getData().getFolks().size());
+        for (int i = 0; i < getData().getFolks().size(); i++) {
+            tag.putUUID("folks." + i, getData().getFolks().get(i));
+        }
     }
 
 

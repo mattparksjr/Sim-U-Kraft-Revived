@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 public class StructureData extends SimpleJsonResourceReloadListener {
-
     private static final Gson GSON_INSTANCE = Deserializers.createFunctionSerializer().create();
     private final static String FOLDER = "structure";
 

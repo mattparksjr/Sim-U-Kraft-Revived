@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class StructureBlock {
-
     private BlockPos pos;
     private BlockState state;
 
