@@ -1,13 +1,19 @@
 package codes.matthewp.sukr.data.player.faction;
 
 import codes.matthewp.sukr.SimUKraft;
+import codes.matthewp.sukr.entity.EntityFolk;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.levelgen.WorldDimensions;
+import net.minecraftforge.event.server.ServerLifecycleEvent;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -129,25 +135,29 @@ public class Faction {
         return tag;
     }
 
-    public void writeToBuf(FriendlyByteBuf buf) {
-        buf.writeUtf(getName());
-        buf.writeUUID(getFactionID());
-        buf.writeUUID(getFactionOwner());
-        buf.writeInt(getPlayers().size());
-        for (int i = 0; i < getPlayers().size(); i++) {
-            buf.writeUUID(getPlayers().get(i));
+
+    public void writeFolkNameToBuf(FriendlyByteBuf buf) {
+        // TODO: 4096 byte limit (27 folk limit approx.)
+        buf.writeInt(getData().getFolks().size());
+        for (int i = 0; i < getData().getFolks().size(); i++) {
+            UUID uuid = getData().getFolks().get(i);
+            if(ServerLifecycleHooks.getCurrentServer() != null) {
+                EntityFolk folk = (EntityFolk) ServerLifecycleHooks.getCurrentServer().overworld().getEntity(uuid);
+                buf.writeUUID(uuid);
+                buf.writeUtf(folk.getFullname());
+            }
         }
-        getData().writeToBuf(buf);
     }
 
-    public static Faction readFromBuf(FriendlyByteBuf buf) {
-        Faction faction = new Faction(buf.readUtf(), buf.readUUID());
-        faction.setFactionOwner(buf.readUUID());
-        for (int i = 0; i < buf.readInt(); i++) {
-            faction.getPlayers().add(buf.readUUID());
+    public static HashMap<UUID, String> readIDToNameFromBuf(FriendlyByteBuf buf) {
+        HashMap<UUID, String> map = new HashMap<>();
+        int total = buf.readInt();
+        for (int i = 0; i < total; i++) {
+            UUID uuid = buf.readUUID();
+            String name = buf.readUtf();
+            map.put(uuid, name);
         }
-        faction.setData(FactionSimData.readFromBuf(buf));
-        return faction;
+        return map;
     }
 
     public void setName(String name) {

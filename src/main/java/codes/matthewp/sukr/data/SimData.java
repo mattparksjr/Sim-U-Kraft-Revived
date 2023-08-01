@@ -46,7 +46,6 @@ public class SimData {
                 return faction;
             }
         }
-        SimUKraft.LOGGER.error("FATAL! Tried to get a faction, of a player who is not in a valid one!");
         return null;
     }
 

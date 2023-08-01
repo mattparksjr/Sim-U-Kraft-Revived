@@ -3,7 +3,7 @@ package codes.matthewp.sukr.gui.constructor;
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
 import codes.matthewp.sukr.gui.ScreenGamemode;
 import codes.matthewp.sukr.net.PacketHandler;
-import codes.matthewp.sukr.net.packet.sync.RequestFactionDataC2SPacket;
+import codes.matthewp.sukr.net.packet.sync.RequestHireBuilderInfoC2SPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -68,7 +68,7 @@ public class ScreenConstructor extends Screen {
 
     private static void pressHire(Button button) {
         Minecraft.getInstance().setScreen(null);
-        PacketHandler.sendToServer(new RequestFactionDataC2SPacket());
+        PacketHandler.sendToServer(new RequestHireBuilderInfoC2SPacket());
     }
 
     private static void pressBuild(Button button) {

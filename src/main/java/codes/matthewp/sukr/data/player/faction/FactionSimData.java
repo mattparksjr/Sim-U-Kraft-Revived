@@ -46,21 +46,6 @@ public class FactionSimData {
         return this;
     }
 
-    public void writeToBuf(FriendlyByteBuf buf) {
-        buf.writeInt(getFolks().size());
-        for (int i = 0; i < getFolks().size(); i++) {
-            buf.writeUUID(getFolks().get(i));
-        }
-    }
-
-    public static FactionSimData readFromBuf(FriendlyByteBuf buf) {
-        FactionSimData data = new FactionSimData();
-        for (int i = 0; i < buf.readInt(); i++) {
-            data.getFolks().add(buf.readUUID());
-        }
-        return data;
-    }
-
     public List<UUID> getFolks() {
         return folks;
     }

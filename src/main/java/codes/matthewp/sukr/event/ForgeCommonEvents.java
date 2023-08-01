@@ -7,8 +7,10 @@ import codes.matthewp.sukr.data.folk.FolkNameData;
 import codes.matthewp.sukr.data.player.PlayerDataProvider;
 import codes.matthewp.sukr.data.structure.StructureData;
 import codes.matthewp.sukr.entity.EntityFolk;
+import codes.matthewp.sukr.init.BlockInit;
 import codes.matthewp.sukr.init.ItemInit;
 import codes.matthewp.sukr.net.PacketHandler;
+import codes.matthewp.sukr.net.packet.FactionAddedS2CPacket;
 import codes.matthewp.sukr.net.packet.sync.SyncGamemodeS2CPacket;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
@@ -36,10 +38,17 @@ public class ForgeCommonEvents {
     @SubscribeEvent
     public static void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity().level().isClientSide) return;
+
+        // Sync
+        if(SimDataManager.get(event.getEntity().getServer().overworld()).getData().getPlayerFaction(event.getEntity().getUUID()) != null) {
+            PacketHandler.sendToPlayer(new FactionAddedS2CPacket(SimDataManager.get(event.getEntity().getServer().overworld()).getData().getPlayerFaction(event.getEntity().getUUID())), (ServerPlayer) event.getEntity());
+        }
         PacketHandler.sendToPlayer(new SyncGamemodeS2CPacket(SimDataManager.get(event.getEntity().getServer().overworld()).getGamemode(), false), (ServerPlayer) event.getEntity());
 
-        // maybe a hash map for player uuid -> faction uuid, or brute force search
+        // Debug
+        ItemHandlerHelper.giveItemToPlayer(event.getEntity(), new ItemStack(BlockInit.BLOCK_CONSTRUCTOR_ITEM.get()));
 
+        // Gameplay related.
         if (SimDataManager.get(event.getEntity().getServer().overworld()).getGamemode() == -1) {
             if (!event.getEntity().getInventory().hasAnyOf(Set.of(ItemInit.ITEM_GAMEMODE.get()))) {
                 ItemHandlerHelper.giveItemToPlayer(event.getEntity(), new ItemStack(ItemInit.ITEM_GAMEMODE.get()));

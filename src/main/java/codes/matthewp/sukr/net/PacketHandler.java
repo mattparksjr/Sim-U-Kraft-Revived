@@ -2,9 +2,8 @@ package codes.matthewp.sukr.net;
 
 import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.net.packet.*;
-import codes.matthewp.sukr.net.packet.gui.ShowHireBuilderS2CPacket;
-import codes.matthewp.sukr.net.packet.sync.RequestFactionDataC2SPacket;
-import codes.matthewp.sukr.net.packet.sync.SyncFactionS2CPacket;
+import codes.matthewp.sukr.net.packet.sync.RequestHireBuilderInfoC2SPacket;
+import codes.matthewp.sukr.net.packet.sync.SyncAvailableBuildersS2CPacket;
 import codes.matthewp.sukr.net.packet.sync.SyncGamemodeS2CPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -66,15 +65,15 @@ public class PacketHandler {
                 .encoder(FactionAddedS2CPacket::toBytes)
                 .consumerMainThread(FactionAddedS2CPacket::handle)
                 .add();
-        INSTANCE.messageBuilder(SyncFactionS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(SyncFactionS2CPacket::new)
-                .encoder(SyncFactionS2CPacket::toBytes)
-                .consumerMainThread(SyncFactionS2CPacket::handle)
+        INSTANCE.messageBuilder(RequestHireBuilderInfoC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(RequestHireBuilderInfoC2SPacket::new)
+                .encoder(RequestHireBuilderInfoC2SPacket::toBytes)
+                .consumerMainThread(RequestHireBuilderInfoC2SPacket::handle)
                 .add();
-        INSTANCE.messageBuilder(RequestFactionDataC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(RequestFactionDataC2SPacket::new)
-                .encoder(RequestFactionDataC2SPacket::toBytes)
-                .consumerMainThread(RequestFactionDataC2SPacket::handle)
+        INSTANCE.messageBuilder(SyncAvailableBuildersS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(SyncAvailableBuildersS2CPacket::new)
+                .encoder(SyncAvailableBuildersS2CPacket::toBytes)
+                .consumerMainThread(SyncAvailableBuildersS2CPacket::handle)
                 .add();
     }
 
