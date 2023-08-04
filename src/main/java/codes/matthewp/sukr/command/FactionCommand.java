@@ -22,7 +22,7 @@ public class FactionCommand {
 
     private static int sendMessage(CommandContext<CommandSourceStack> commandContext, String message) throws CommandSyntaxException {
         Entity entity = commandContext.getSource().getEntity();
-        if(entity != null) {
+        if (entity != null) {
             commandContext.getSource().getServer().getPlayerList().broadcastChatMessage(PlayerChatMessage.system(message), new ServerPlayer(commandContext.getSource().getServer(), commandContext.getSource().getLevel(), new GameProfile(entity.getUUID(), entity.getName().toString())), ChatType.bind(ChatType.SAY_COMMAND, commandContext.getSource()));
         } else {
             commandContext.getSource().getServer().getPlayerList().broadcastChatMessage(PlayerChatMessage.system(message), commandContext.getSource(), ChatType.bind(ChatType.SAY_COMMAND, commandContext.getSource()));

@@ -5,14 +5,11 @@ import codes.matthewp.sukr.data.SimDataManager;
 import codes.matthewp.sukr.data.player.faction.Faction;
 import codes.matthewp.sukr.entity.EntityFolk;
 import codes.matthewp.sukr.init.EntityInit;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 import java.util.Random;
@@ -25,8 +22,8 @@ public class TickHandler {
             return;
         }
 
-        for(Faction faction : simData.getData().getFactions()) {
-            if(shouldSpawnNewFolk(server.overworld(), faction)) {
+        for (Faction faction : simData.getData().getFactions()) {
+            if (shouldSpawnNewFolk(server.overworld(), faction)) {
                 summonNewFolk(server, faction);
             }
         }
@@ -36,7 +33,7 @@ public class TickHandler {
     private static void summonNewFolk(MinecraftServer server, Faction faction) {
         Random random = new Random();
         ServerLevel level = server.overworld();
-        if(level.players().isEmpty()) return;
+        if (level.players().isEmpty()) return;
 
         ServerPlayer player = faction.getFirstOnline(level);
         int x = (random.nextInt(2) == 1) ? player.getBlockX() + random.nextInt(25) : player.getBlockX() - random.nextInt(25);
@@ -44,7 +41,7 @@ public class TickHandler {
         BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, 0, z));
 
         EntityFolk folk = EntityInit.FOLK.get().spawn(level, pos, MobSpawnType.NATURAL);
-        if(folk != null) {
+        if (folk != null) {
             SimDataManager.get(server.overworld()).addFolk(server.overworld(), faction, folk);
         } else {
             SimUKraft.LOGGER.error("Failed to spawn a new folk at: " + pos.toShortString());
@@ -52,8 +49,8 @@ public class TickHandler {
     }
 
     private static boolean shouldSpawnNewFolk(ServerLevel level, Faction faction) {
-        if(!faction.isOnline(level)) return false;
-        if(faction.getData().getFolks().isEmpty()) return true;
+        if (!faction.isOnline(level)) return false;
+        if (faction.getData().getFolks().isEmpty()) return true;
         return false;
     }
 }

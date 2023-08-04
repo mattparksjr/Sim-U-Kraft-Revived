@@ -12,19 +12,19 @@ public class StructureBlock {
         this.state = state;
     }
 
-    public void setPos(BlockPos pos) {
-        this.pos = pos;
-    }
-
-    public void setState(BlockState state) {
-        this.state = state;
-    }
-
     public BlockPos getPos() {
         return pos;
     }
 
+    public void setPos(BlockPos pos) {
+        this.pos = pos;
+    }
+
     public BlockState getState() {
         return state;
+    }
+
+    public void setState(BlockState state) {
+        this.state = state;
     }
 }

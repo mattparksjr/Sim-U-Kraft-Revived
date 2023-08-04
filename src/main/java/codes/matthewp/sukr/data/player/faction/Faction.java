@@ -31,7 +31,7 @@ public class Faction {
     private FactionSimData data;
 
     public Faction(UUID player) {
-      this("System", player);
+        this("System", player);
     }
 
     public Faction(String name, UUID player) {
@@ -44,6 +44,17 @@ public class Faction {
 
     public Faction(CompoundTag tag) {
         load(tag);
+    }
+
+    public static HashMap<UUID, String> readIDToNameFromBuf(FriendlyByteBuf buf) {
+        HashMap<UUID, String> map = new HashMap<>();
+        int total = buf.readInt();
+        for (int i = 0; i < total; i++) {
+            UUID uuid = buf.readUUID();
+            String name = buf.readUtf();
+            map.put(uuid, name);
+        }
+        return map;
     }
 
     public ServerPlayer getFirstOnline(ServerLevel level) {
@@ -61,17 +72,18 @@ public class Faction {
 
     /**
      * Get a list of all players who are currently online
+     *
      * @param level ServerLevel the world
      * @return List of online players
      */
     public List<ServerPlayer> getOnlinePlayers(ServerLevel level) {
         List<ServerPlayer> online = new ArrayList<>();
 
-        if(isPlayerOnline(level, getFactionOwner()))
+        if (isPlayerOnline(level, getFactionOwner()))
             online.add((ServerPlayer) level.getEntity(getFactionOwner()));
 
-        for(UUID uuid : getPlayers()) {
-            if((uuid != getFactionOwner()) && isPlayerOnline(level, uuid))
+        for (UUID uuid : getPlayers()) {
+            if ((uuid != getFactionOwner()) && isPlayerOnline(level, uuid))
                 online.add((ServerPlayer) level.getEntity(uuid));
         }
         return online;
@@ -100,8 +112,9 @@ public class Faction {
 
     /**
      * Check if a specific player is online.
+     *
      * @param level ServerLevel servers level
-     * @param uuid UUID players uuid
+     * @param uuid  UUID players uuid
      * @return true if player is online
      */
     public boolean isPlayerOnline(ServerLevel level, UUID uuid) {
@@ -134,13 +147,12 @@ public class Faction {
         }
     }
 
-
     public void writeFolkNameToBuf(FriendlyByteBuf buf) {
         // TODO: 4096 byte limit (27 folk limit approx.)
         buf.writeInt(getData().getFolks().size());
         for (int i = 0; i < getData().getFolks().size(); i++) {
             UUID uuid = getData().getFolks().get(i);
-            if(ServerLifecycleHooks.getCurrentServer() != null) {
+            if (ServerLifecycleHooks.getCurrentServer() != null) {
                 EntityFolk folk = (EntityFolk) ServerLifecycleHooks.getCurrentServer().overworld().getEntity(uuid);
                 buf.writeUUID(uuid);
                 buf.writeUtf(folk.getFullname());
@@ -148,31 +160,20 @@ public class Faction {
         }
     }
 
-    public static HashMap<UUID, String> readIDToNameFromBuf(FriendlyByteBuf buf) {
-        HashMap<UUID, String> map = new HashMap<>();
-        int total = buf.readInt();
-        for (int i = 0; i < total; i++) {
-            UUID uuid = buf.readUUID();
-            String name = buf.readUtf();
-            map.put(uuid, name);
-        }
-        return map;
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public List<UUID> getPlayers() {
+        return players;
     }
 
     public void setPlayers(List<UUID> players) {
         this.players = players;
-    }
-
-    public List<UUID> getPlayers() {
-        return players;
     }
 
     public void addPlayer(UUID uuid) {
@@ -198,11 +199,11 @@ public class Faction {
         this.data = data;
     }
 
-    public void setFactionOwner(UUID factionOwner) {
-        this.factionOwner = factionOwner;
-    }
-
     public UUID getFactionOwner() {
         return factionOwner;
+    }
+
+    public void setFactionOwner(UUID factionOwner) {
+        this.factionOwner = factionOwner;
     }
 }

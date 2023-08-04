@@ -18,28 +18,28 @@ public class Structure {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public StructureCategory getCategory() {
-        return category;
-    }
-
-    public String getFile() {
-        return file;
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public StructureCategory getCategory() {
+        return category;
+    }
+
     public void setCategory(StructureCategory category) {
         this.category = category;
+    }
+
+    public String getFile() {
+        return file;
     }
 
     public void setFile(String file) {

@@ -17,6 +17,15 @@ import java.util.ArrayList;
 
 public class StructureManager {
 
+    public static ArrayList<BlockState> getBuildingPalette(CompoundTag nbt, Level level) {
+        ArrayList<BlockState> palette = new ArrayList<>();
+        // load in palette (list of unique blockstates)
+        ListTag paletteNbt = nbt.getList("palette", 10);
+        for (int i = 0; i < paletteNbt.size(); i++)
+            palette.add(NbtUtils.readBlockState(level.holderLookup(Registries.BLOCK), paletteNbt.getCompound(i)));
+        return palette;
+    }
+
     public ArrayList<StructureBlock> getBuildingBlocks(Structure structure, Level level) {
         return getBuildingBlocks(structure.getFile(), level);
     }
@@ -63,14 +72,5 @@ public class StructureManager {
             SimUKraft.LOGGER.error("Error reading building NBT {}, {}", structureName, ex);
         }
         return null;
-    }
-
-    public static ArrayList<BlockState> getBuildingPalette(CompoundTag nbt, Level level) {
-        ArrayList<BlockState> palette = new ArrayList<>();
-        // load in palette (list of unique blockstates)
-        ListTag paletteNbt = nbt.getList("palette", 10);
-        for (int i = 0; i < paletteNbt.size(); i++)
-            palette.add(NbtUtils.readBlockState(level.holderLookup(Registries.BLOCK), paletteNbt.getCompound(i)));
-        return palette;
     }
 }

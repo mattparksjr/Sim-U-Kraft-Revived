@@ -1,7 +1,5 @@
 package codes.matthewp.sukr.net.packet.sync;
 
-import codes.matthewp.sukr.data.SimDataManager;
-import codes.matthewp.sukr.data.player.PlayerDataProvider;
 import codes.matthewp.sukr.data.player.faction.Faction;
 import codes.matthewp.sukr.util.ClientUtil;
 import net.minecraft.network.FriendlyByteBuf;

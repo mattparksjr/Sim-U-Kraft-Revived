@@ -1,6 +1,5 @@
 package codes.matthewp.sukr.data.player;
 
-import codes.matthewp.sukr.SimUKraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
@@ -46,7 +45,7 @@ public class PlayerData {
 
     public void loadNBT(CompoundTag tag) {
         money = tag.getDouble("money");
-        if(tag.get("factionid") != null) {
+        if (tag.get("factionid") != null) {
             setFactionID(tag.getUUID("factionid"));
         }
     }

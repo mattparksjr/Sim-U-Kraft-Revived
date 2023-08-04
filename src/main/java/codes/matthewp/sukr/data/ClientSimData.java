@@ -42,7 +42,6 @@ public class ClientSimData {
     }
 
     public static void setFaction(Faction newFaction) {
-        SimUKraft.LOGGER.debug("CLIENT - WE HAVE BEEN TOLD OUR FACTION IS: " + newFaction.getFactionID() + " ---- " + newFaction.getFactionOwner());
         ClientSimData.faction = newFaction;
     }
 }

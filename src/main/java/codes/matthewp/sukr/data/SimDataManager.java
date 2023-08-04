@@ -54,13 +54,12 @@ public class SimDataManager extends SavedData {
     public void addFolk(ServerLevel level, Faction faction, EntityFolk folk) {
         faction.getData().addFolk(folk);
         setDirty();
-        for(ServerPlayer player : faction.getOnlinePlayers(level)) {
+        for (ServerPlayer player : faction.getOnlinePlayers(level)) {
             PacketHandler.sendToPlayer(new FolkSpawnedS2CPacket(folk.getId()), player);
         }
     }
 
     public void addFaction(Faction faction, ServerPlayer player) {
-        SimUKraft.LOGGER.debug("SERVER - ADDED FACTION, SENDING TO PLAYER");
         data.addFaction(faction);
         setDirty();
         PacketHandler.sendToPlayer(new FactionAddedS2CPacket(faction), player);

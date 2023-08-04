@@ -15,16 +15,44 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScreenConstructor extends Screen {
 
-    private int buttonW;
-    private final int buttonH = 20;
-
     private static BlockConstructorEntity entity;
     private static Player player;
+    private final int buttonH = 20;
+    private int buttonW;
 
     public ScreenConstructor(BlockConstructorEntity entity, Player player) {
         super(Component.literal("Constructor"));
         ScreenConstructor.entity = entity;
         ScreenConstructor.player = player;
+    }
+
+    private static void pressDone(Button button) {
+        Minecraft.getInstance().setScreen(null);
+    }
+
+    private static void pressHire(Button button) {
+        Minecraft.getInstance().setScreen(null);
+        PacketHandler.sendToServer(new RequestHireBuilderInfoC2SPacket());
+    }
+
+    private static void pressBuild(Button button) {
+        Minecraft.getInstance().setScreen(null);
+    }
+
+    private static void pressFire(Button button) {
+        Minecraft.getInstance().setScreen(null);
+    }
+
+    private static void pressTerraformArea(Button button) {
+        Minecraft.getInstance().setScreen(null);
+    }
+
+    private static void pressTerraform(Button button) {
+        Minecraft.getInstance().setScreen(null);
+    }
+
+    private static void pressShowEmployees(Button button) {
+        Minecraft.getInstance().setScreen(new ScreenGamemode());
     }
 
     @Override
@@ -60,34 +88,5 @@ public class ScreenConstructor extends Screen {
         graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.constructor.choosetask").withStyle(ChatFormatting.YELLOW), width / 2, height / 3 + 20, 1);
 
         super.render(graphics, mouseX, mouseY, partialTick);
-    }
-
-    private static void pressDone(Button button) {
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private static void pressHire(Button button) {
-        Minecraft.getInstance().setScreen(null);
-        PacketHandler.sendToServer(new RequestHireBuilderInfoC2SPacket());
-    }
-
-    private static void pressBuild(Button button) {
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private static void pressFire(Button button) {
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private static void pressTerraformArea(Button button) {
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private static void pressTerraform(Button button) {
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private static void pressShowEmployees(Button button) {
-        Minecraft.getInstance().setScreen(new ScreenGamemode());
     }
 }

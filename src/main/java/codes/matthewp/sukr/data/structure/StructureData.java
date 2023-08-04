@@ -30,6 +30,10 @@ public class StructureData extends SimpleJsonResourceReloadListener {
         super(GSON_INSTANCE, FOLDER);
     }
 
+    public static List<Structure> getStructures() {
+        return structures;
+    }
+
     @Override
     protected void apply(@NotNull Map<ResourceLocation, JsonElement> resourceList, ResourceManager resourceManagerIn, @NotNull ProfilerFiller profilerIn) {
         ResourceLocation resourcelocation = new ResourceLocation(SimUKraft.MODID, FOLDER + "/structures.json");
@@ -61,9 +65,5 @@ public class StructureData extends SimpleJsonResourceReloadListener {
         }
         StructureData.structures = structureList;
         SimUKraft.LOGGER.debug("Loaded {} structures", structureList.size());
-    }
-
-    public static List<Structure> getStructures() {
-        return structures;
     }
 }

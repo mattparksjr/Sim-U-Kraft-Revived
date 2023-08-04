@@ -22,6 +22,14 @@ public class ScreenHireBuilder extends Screen {
         this.map = map;
     }
 
+    private static void pressDone(Button button) {
+        Minecraft.getInstance().setScreen(null);
+    }
+
+    private static void pressCancel(Button button) {
+        //  Minecraft.getInstance().setScreen(new ScreenConstructor(entity, player));
+    }
+
     @Override
     protected void init() {
         super.init();
@@ -46,14 +54,5 @@ public class ScreenHireBuilder extends Screen {
         graphics.drawCenteredString(this.font, Component.translatable("simukraftr.gui.constructor.choosefolk").withStyle(ChatFormatting.YELLOW), width / 2, height / 3 - 20, 1);
 
         super.render(graphics, mouseX, mouseY, partialTick);
-    }
-
-
-    private static void pressDone(Button button) {
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private static void pressCancel(Button button) {
-        //  Minecraft.getInstance().setScreen(new ScreenConstructor(entity, player));
     }
 }

@@ -73,6 +73,10 @@ public class EntityFolk extends AgeableMob {
         ((GroundPathNavigation) this.getNavigation()).setCanOpenDoors(true);
     }
 
+    public static AttributeSupplier.Builder getFolkAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.MOVEMENT_SPEED, 0.5D);
+    }
+
     @Override
     public void kill() {
         super.kill();
@@ -109,10 +113,6 @@ public class EntityFolk extends AgeableMob {
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-    }
-
-    public static AttributeSupplier.Builder getFolkAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.MOVEMENT_SPEED, 0.5D);
     }
 
     @Nullable

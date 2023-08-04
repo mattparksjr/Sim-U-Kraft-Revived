@@ -40,7 +40,7 @@ public class ForgeCommonEvents {
         if (event.getEntity().level().isClientSide) return;
 
         // Sync
-        if(SimDataManager.get(event.getEntity().getServer().overworld()).getData().getPlayerFaction(event.getEntity().getUUID()) != null) {
+        if (SimDataManager.get(event.getEntity().getServer().overworld()).getData().getPlayerFaction(event.getEntity().getUUID()) != null) {
             PacketHandler.sendToPlayer(new FactionAddedS2CPacket(SimDataManager.get(event.getEntity().getServer().overworld()).getData().getPlayerFaction(event.getEntity().getUUID())), (ServerPlayer) event.getEntity());
         }
         PacketHandler.sendToPlayer(new SyncGamemodeS2CPacket(SimDataManager.get(event.getEntity().getServer().overworld()).getGamemode(), false), (ServerPlayer) event.getEntity());

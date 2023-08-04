@@ -1,9 +1,6 @@
 package codes.matthewp.sukr.data;
 
-import codes.matthewp.sukr.SimUKraft;
-import codes.matthewp.sukr.data.folk.FolkData;
 import codes.matthewp.sukr.data.player.faction.Faction;
-import codes.matthewp.sukr.data.player.faction.FactionSimData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,21 +33,21 @@ public class SimData {
         return factions;
     }
 
+    public void setFactions(List<Faction> factions) {
+        this.factions = factions;
+    }
+
     public Faction getPlayerFaction(UUID uuid) {
         // TODO: This is _prob_ fine, but its 100% a bad way to do this...
-        for(Faction faction : factions) {
-            if(faction.getFactionOwner().equals(uuid)) {
+        for (Faction faction : factions) {
+            if (faction.getFactionOwner().equals(uuid)) {
                 return faction;
             }
-            if(faction.getPlayers().contains(uuid)) {
+            if (faction.getPlayers().contains(uuid)) {
                 return faction;
             }
         }
         return null;
-    }
-
-    public void setFactions(List<Faction> factions) {
-        this.factions = factions;
     }
 
     public void addFaction(Faction faction) {

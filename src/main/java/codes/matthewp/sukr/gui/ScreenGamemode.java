@@ -1,6 +1,5 @@
 package codes.matthewp.sukr.gui;
 
-import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.data.player.faction.Faction;
 import codes.matthewp.sukr.net.PacketHandler;
 import codes.matthewp.sukr.net.packet.CreateFactionC2SPacket;
@@ -19,6 +18,25 @@ public class ScreenGamemode extends Screen {
 
     public ScreenGamemode() {
         super(Component.literal("Gamemode Selection"));
+    }
+
+    private static void pressDNR(Button button) {
+        PacketHandler.sendToServer(new SetGamemodeC2SPacket(0));
+        Minecraft.getInstance().setScreen(null);
+    }
+
+    private static void pressSurvival(Button button) {
+        PacketHandler.sendToServer(new SetGamemodeC2SPacket(1));
+        Faction faction = new Faction(Minecraft.getInstance().player.getUUID());
+        PacketHandler.sendToServer(new CreateFactionC2SPacket(faction));
+        Minecraft.getInstance().setScreen(null);
+    }
+
+    private static void pressCreative(Button button) {
+        PacketHandler.sendToServer(new SetGamemodeC2SPacket(2));
+        Faction faction = new Faction(Minecraft.getInstance().player.getUUID());
+        PacketHandler.sendToServer(new CreateFactionC2SPacket(faction));
+        Minecraft.getInstance().setScreen(null);
     }
 
     @Override
@@ -43,24 +61,5 @@ public class ScreenGamemode extends Screen {
 
 
         super.render(graphics, mouseX, mouseY, partialTick);
-    }
-
-    private static void pressDNR(Button button) {
-        PacketHandler.sendToServer(new SetGamemodeC2SPacket(0));
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private static void pressSurvival(Button button) {
-        PacketHandler.sendToServer(new SetGamemodeC2SPacket(1));
-        Faction faction = new Faction(Minecraft.getInstance().player.getUUID());
-        PacketHandler.sendToServer(new CreateFactionC2SPacket(faction));
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private static void pressCreative(Button button) {
-        PacketHandler.sendToServer(new SetGamemodeC2SPacket(2));
-        Faction faction = new Faction(Minecraft.getInstance().player.getUUID());
-        PacketHandler.sendToServer(new CreateFactionC2SPacket(faction));
-        Minecraft.getInstance().setScreen(null);
     }
 }

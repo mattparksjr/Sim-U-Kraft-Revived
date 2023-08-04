@@ -33,6 +33,18 @@ public class FolkNameData extends SimpleJsonResourceReloadListener {
         super(GSON_INSTANCE, FOLDER);
     }
 
+    public static List<String> getFemaleNames() {
+        return femaleNames;
+    }
+
+    public static List<String> getMaleNames() {
+        return maleNames;
+    }
+
+    public static List<String> getLastNames() {
+        return lastNames;
+    }
+
     @Override
     protected void apply(@NotNull Map<ResourceLocation, JsonElement> resourceList, ResourceManager resourceManagerIn, @NotNull ProfilerFiller profilerIn) {
         ResourceLocation resourcelocation = new ResourceLocation(SimUKraft.MODID, FOLDER + "/names.json");
@@ -73,17 +85,5 @@ public class FolkNameData extends SimpleJsonResourceReloadListener {
         FolkNameData.femaleNames = femaleNames;
         FolkNameData.lastNames = lastNames;
         SimUKraft.LOGGER.debug("Loaded {} male names, {} female names, and {} last names", maleNames.size(), femaleNames.size(), lastNames.size());
-    }
-
-    public static List<String> getFemaleNames() {
-        return femaleNames;
-    }
-
-    public static List<String> getMaleNames() {
-        return maleNames;
-    }
-
-    public static List<String> getLastNames() {
-        return lastNames;
     }
 }

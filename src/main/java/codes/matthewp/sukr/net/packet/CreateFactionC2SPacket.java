@@ -1,6 +1,5 @@
 package codes.matthewp.sukr.net.packet;
 
-import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.data.SimDataManager;
 import codes.matthewp.sukr.data.player.PlayerDataProvider;
 import codes.matthewp.sukr.data.player.faction.Faction;
