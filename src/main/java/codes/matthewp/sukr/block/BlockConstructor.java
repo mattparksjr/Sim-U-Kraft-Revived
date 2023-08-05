@@ -1,10 +1,14 @@
 package codes.matthewp.sukr.block;
 
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
+import codes.matthewp.sukr.data.ClientSimData;
 import codes.matthewp.sukr.init.BlockEntityInit;
 import codes.matthewp.sukr.init.SoundInit;
 import codes.matthewp.sukr.util.ClientUtil;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -44,9 +48,12 @@ public class BlockConstructor extends Block implements EntityBlock {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
-        // TODO: TEST IF ITS NOT SET UP YET (RARE)
         if (level.isClientSide) {
-            ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos), player);
+            if (ClientSimData.getGamemode() != -1) {
+                ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos), player);
+            } else {
+                player.sendSystemMessage(Component.literal(I18n.get("simkraftr.message.gamemmodenotset")));
+            }
         }
         return super.use(state, level, pos, player, hand, result);
     }

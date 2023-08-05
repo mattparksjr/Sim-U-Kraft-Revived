@@ -22,6 +22,7 @@
   "simukraftr.message.creative": "creative",
   "simukraftr.message.dnrset": "Sim-U-Kraft - Sim-U-Kraft has been set to not run for this world.",
   "simukraftr.message.folkspawned": "%s has wandered into the area.",
+  "simkraftr.message.gamemmodenotset": "Then gamemode has not been set for this world yet. Please use the gamemode selection book!",
   "simukraftr.text.homeless": "Homeless",
   "simukraftr.gui.button.done": "Done",
   "simukraftr.gui.constructor.hire": "Hire builder",
