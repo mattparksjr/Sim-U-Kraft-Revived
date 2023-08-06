@@ -2,17 +2,21 @@ package codes.matthewp.sukr.net;
 
 import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.net.packet.*;
-import codes.matthewp.sukr.net.packet.sync.RequestHireBuilderInfoC2SPacket;
-import codes.matthewp.sukr.net.packet.sync.SyncAvailableBuildersS2CPacket;
-import codes.matthewp.sukr.net.packet.sync.SyncGamemodeS2CPacket;
+import codes.matthewp.sukr.net.packet.sync.*;
 import codes.matthewp.sukr.net.packet.update.SetWorkerC2SPacket;
 import codes.matthewp.sukr.net.packet.update.WorkerSetS2CPacket;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.commands.FillBiomeCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
+
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class PacketHandler {
     private static final String PROTOCOL_VERSION = "1";
@@ -82,6 +86,17 @@ public class PacketHandler {
                 .encoder(WorkerSetS2CPacket::toBytes)
                 .consumerMainThread(WorkerSetS2CPacket::handle)
                 .add();
+        INSTANCE.messageBuilder(RequestStructureListC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(RequestStructureListC2SPacket::new)
+                .encoder(RequestStructureListC2SPacket::toBytes)
+                .consumerMainThread(RequestStructureListC2SPacket::handle)
+                .add();
+        INSTANCE.messageBuilder(SyncStructuresS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(SyncStructuresS2CPacket::new)
+                .encoder(SyncStructuresS2CPacket::toBytes)
+                .consumerMainThread(SyncStructuresS2CPacket::handle)
+                .add();
+
     }
 
     public static <MSG> void sendToServer(MSG msg) {

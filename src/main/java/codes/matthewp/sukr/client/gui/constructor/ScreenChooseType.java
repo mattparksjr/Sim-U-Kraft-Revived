@@ -2,6 +2,8 @@ package codes.matthewp.sukr.client.gui.constructor;
 
 import codes.matthewp.sukr.client.gui.base.ScreenBase;
 import codes.matthewp.sukr.data.structure.StructureCategory;
+import codes.matthewp.sukr.net.PacketHandler;
+import codes.matthewp.sukr.net.packet.sync.RequestStructureListC2SPacket;
 import codes.matthewp.sukr.util.ClientUtil;
 import io.netty.channel.epoll.Epoll;
 import net.minecraft.ChatFormatting;
@@ -49,6 +51,7 @@ public class ScreenChooseType extends ScreenBase {
 
     public void onPress(StructureCategory category) {
 
+        PacketHandler.sendToServer(new RequestStructureListC2SPacket(pos, category));
     }
 
     @Override

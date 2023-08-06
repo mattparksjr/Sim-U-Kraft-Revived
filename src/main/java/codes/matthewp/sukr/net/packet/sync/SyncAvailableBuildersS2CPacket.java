@@ -1,6 +1,5 @@
 package codes.matthewp.sukr.net.packet.sync;
 
-import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.data.player.faction.Faction;
 import codes.matthewp.sukr.util.ClientUtil;
 import net.minecraft.core.BlockPos;
@@ -35,7 +34,7 @@ public class SyncAvailableBuildersS2CPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            ClientUtil.openHireBuilderGUI(pos, map);
+            ClientUtil.showHire(pos, map);
         });
         return true;
     }

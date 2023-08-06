@@ -28,6 +28,11 @@ public class ScreenBase extends Screen {
         super.render(graphics, mouseX, mouseY, partialTick);
     }
 
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
+
     public void drawCenteredString(GuiGraphics graphics, Component text, int x, int y) {
         this.drawCenteredString(graphics, text, x, y, 1);
     }

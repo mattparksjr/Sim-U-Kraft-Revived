@@ -1,24 +1,29 @@
 package codes.matthewp.sukr.data.structure;
 
+import net.minecraft.core.Vec3i;
+
 /**
- * Simple representation of any kind of structure
+ * This is the data that is sent to the client, instead of all the unrelated structure data.
  */
-public class Structure {
+public class StructurePacketData {
 
     private String id;
     private String name;
-    private StructureCategory category;
-    private String file;
+
+    private Vec3i size;
+
+    private double cost;
 
     private String author;
 
-    public Structure(String id, String name, StructureCategory category, String file, String author) {
+    public StructurePacketData(String id, String name, Vec3i size, double cost, String author) {
         this.id = id;
         this.name = name;
-        this.category = category;
-        this.file = file;
+        this.size = size;
+        this.cost = cost;
         this.author = author;
     }
+
     public String getId() {
         return id;
     }
@@ -35,20 +40,20 @@ public class Structure {
         this.name = name;
     }
 
-    public StructureCategory getCategory() {
-        return category;
+    public Vec3i getSize() {
+        return size;
     }
 
-    public void setCategory(StructureCategory category) {
-        this.category = category;
+    public void setSize(Vec3i size) {
+        this.size = size;
     }
 
-    public String getFile() {
-        return file;
+    public double getCost() {
+        return cost;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public String getAuthor() {

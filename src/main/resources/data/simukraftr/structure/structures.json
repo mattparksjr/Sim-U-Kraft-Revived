@@ -6,13 +6,15 @@
       "name": "simukraftr.structure.nowoolstarter",
       "category": "Residential",
       "_comment": "Remember that the resource location must be lowercase, as such, the structure file name must be too.",
-      "file": "og-no_wool_starter_home"
+      "file": "og-no_wool_starter_home",
+      "author": "Zelamy"
     },
     {
       "id": "nowoolstarterhome2",
       "name": "simukraftr.structure.nowoolstarter",
       "category": "Residential",
-      "file": "og-no_wool_starter_home"
+      "file": "og-no_wool_starter_home",
+      "author": "Iterable"
     }
   ]
 }

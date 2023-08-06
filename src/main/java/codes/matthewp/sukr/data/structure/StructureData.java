@@ -34,6 +34,16 @@ public class StructureData extends SimpleJsonResourceReloadListener {
         return structures;
     }
 
+    public static List<Structure> getStructuresByCategory(StructureCategory category) {
+        List<Structure> list = new ArrayList<>();
+        for(Structure structure : getStructures()) {
+            if(structure.getCategory() == category) {
+                list.add(structure);
+            }
+        }
+        return list;
+    }
+
     @Override
     protected void apply(@NotNull Map<ResourceLocation, JsonElement> resourceList, ResourceManager resourceManagerIn, @NotNull ProfilerFiller profilerIn) {
         ResourceLocation resourcelocation = new ResourceLocation(SimUKraft.MODID, FOLDER + "/structures.json");
@@ -55,7 +65,7 @@ public class StructureData extends SimpleJsonResourceReloadListener {
                             structureData.get("id").getAsString(),
                             structureData.get("name").getAsString(),
                             StructureCategory.valueOf(structureData.get("category").getAsString().toUpperCase()),
-                            structureData.get("file").getAsString());
+                            structureData.get("file").getAsString(), structureData.get("author").getAsString());
                     structureList.add(finalStruct);
                 }
 

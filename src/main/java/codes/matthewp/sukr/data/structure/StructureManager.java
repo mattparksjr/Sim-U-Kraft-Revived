@@ -2,6 +2,7 @@ package codes.matthewp.sukr.data.structure;
 
 import codes.matthewp.sukr.SimUKraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -16,6 +17,22 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class StructureManager {
+
+    public Vec3i getSize(Structure structure, Level level) {
+        return getSize(structure.getFile(), level);
+    }
+
+    public Vec3i getSize(String structureName, Level level) {
+        CompoundTag nbt = getBuildingNbt(structureName);
+
+        if (nbt == null) {
+            SimUKraft.LOGGER.debug("Returning null on getSize(), due to an error.");
+            return null;
+        }
+        ListTag sizeData = nbt.getList("size", 3);
+        return new Vec3i(sizeData.getInt(0), sizeData.getInt(1), sizeData.getInt(2));
+
+    }
 
     public static ArrayList<BlockState> getBuildingPalette(CompoundTag nbt, Level level) {
         ArrayList<BlockState> palette = new ArrayList<>();

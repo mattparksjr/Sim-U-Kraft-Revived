@@ -57,7 +57,7 @@ public class ScreenConstructor extends ScreenBase {
         }).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 - buttonWidth + 10, height / 2).build());
 
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.choose"), button -> {
-            ClientUtil.openChooseType(entityPos, player);
+            ClientUtil.showChooseType(entityPos, player);
         }).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 + 10, height / 2).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.fire"), ScreenBase::closeGUI).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 + buttonWidth + 10, height / 2).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.terraformer"), ScreenBase::closeGUI).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 - buttonWidth + 10, height / 2 + buttonHeight).build());
