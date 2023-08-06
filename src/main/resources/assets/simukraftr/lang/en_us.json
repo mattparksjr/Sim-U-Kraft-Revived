@@ -46,6 +46,7 @@
   "simukraftr.gui.constructor.choosefolk": "Please choose an unemployed Sim-U-Folk you want to hire",
   "simukraftr.gui.constructor.choosebuildingtype": "Please choose a type of building",
   "simukraftr.gui.constructor.choosebuilding": "Next, choose the %d building to build",
+  "simukraftr.gui.constructor.nobuildings": "Nothing found, go back and choose another",
   "simukraftr.gui.gamemode.welcome": "Welcome to Sim-U-Kraft",
   "simukraftr.gui.gamemode.mode": "Please choose a mode to play in:",
   "simukraftr.gui.gamemode.donotrun": "Do NOT run Sim-U-Kraft",

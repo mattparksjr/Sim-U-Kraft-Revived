@@ -39,7 +39,11 @@ public class RequestStructureListC2SPacket {
             List<StructurePacketData> structurePacketData = new ArrayList<>();
 
             for(Structure structure : structures) {
-                structurePacketData.add(new StructurePacketData(structure.getId(), structure.getName(), new StructureManager().getSize(structure, context.getSender().serverLevel()), 20.0, structure.getAuthor()));
+                structurePacketData.add(new StructurePacketData(
+                        structure.getId(),
+                        structure.getName(),
+                        new StructureManager().getSize(structure, context.getSender().serverLevel()),
+                        new StructureManager().getBuildingBlocks(structure, context.getSender().serverLevel()).size() * 0.02d, structure.getAuthor()));
             }
 
             PacketHandler.sendToPlayer(new SyncStructuresS2CPacket(pos, category, structurePacketData), context.getSender());
