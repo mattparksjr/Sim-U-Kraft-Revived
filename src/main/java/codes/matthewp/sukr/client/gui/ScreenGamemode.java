@@ -1,7 +1,7 @@
-package codes.matthewp.sukr.gui;
+package codes.matthewp.sukr.client.gui;
 
 import codes.matthewp.sukr.data.player.faction.Faction;
-import codes.matthewp.sukr.gui.base.ScreenBase;
+import codes.matthewp.sukr.client.gui.base.ScreenBase;
 import codes.matthewp.sukr.net.PacketHandler;
 import codes.matthewp.sukr.net.packet.CreateFactionC2SPacket;
 import codes.matthewp.sukr.net.packet.SetGamemodeC2SPacket;

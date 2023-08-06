@@ -1,6 +1,5 @@
-package codes.matthewp.sukr.gui.base;
+package codes.matthewp.sukr.client.gui.base;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

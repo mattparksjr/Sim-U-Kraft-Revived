@@ -5,6 +5,8 @@ import codes.matthewp.sukr.net.packet.*;
 import codes.matthewp.sukr.net.packet.sync.RequestHireBuilderInfoC2SPacket;
 import codes.matthewp.sukr.net.packet.sync.SyncAvailableBuildersS2CPacket;
 import codes.matthewp.sukr.net.packet.sync.SyncGamemodeS2CPacket;
+import codes.matthewp.sukr.net.packet.update.SetWorkerC2SPacket;
+import codes.matthewp.sukr.net.packet.update.WorkerSetS2CPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -30,11 +32,6 @@ public class PacketHandler {
                 PROTOCOL_VERSION::equals
         );
 
-        INSTANCE.messageBuilder(ExampleC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ExampleC2SPacket::new)
-                .encoder(ExampleC2SPacket::toBytes)
-                .consumerMainThread(ExampleC2SPacket::handle)
-                .add();
         INSTANCE.messageBuilder(GamemodeCheckC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(GamemodeCheckC2SPacket::new)
                 .encoder(GamemodeCheckC2SPacket::toBytes)
@@ -74,6 +71,16 @@ public class PacketHandler {
                 .decoder(SyncAvailableBuildersS2CPacket::new)
                 .encoder(SyncAvailableBuildersS2CPacket::toBytes)
                 .consumerMainThread(SyncAvailableBuildersS2CPacket::handle)
+                .add();
+        INSTANCE.messageBuilder(SetWorkerC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(SetWorkerC2SPacket::new)
+                .encoder(SetWorkerC2SPacket::toBytes)
+                .consumerMainThread(SetWorkerC2SPacket::handle)
+                .add();
+        INSTANCE.messageBuilder(WorkerSetS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(WorkerSetS2CPacket::new)
+                .encoder(WorkerSetS2CPacket::toBytes)
+                .consumerMainThread(WorkerSetS2CPacket::handle)
                 .add();
     }
 

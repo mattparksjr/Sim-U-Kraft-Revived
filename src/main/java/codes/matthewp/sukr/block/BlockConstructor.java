@@ -48,13 +48,14 @@ public class BlockConstructor extends Block implements EntityBlock {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
-        if (level.isClientSide) {
+        if (level.isClientSide()) {
             if (ClientSimData.getGamemode() != -1) {
-                ClientUtil.showConstructor((BlockConstructorEntity) level.getBlockEntity(pos), player);
+                ClientUtil.showConstructor(pos, player);
+                return InteractionResult.PASS;
             } else {
                 player.sendSystemMessage(Component.literal(I18n.get("simkraftr.message.gamemmodenotset")));
             }
         }
-        return super.use(state, level, pos, player, hand, result);
+        return InteractionResult.FAIL;
     }
 }

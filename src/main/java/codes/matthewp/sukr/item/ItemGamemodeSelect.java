@@ -22,7 +22,7 @@ public class ItemGamemodeSelect extends Item {
             if (ClientSimData.getGamemode() == -1) {
                 player.startUsingItem(hand);
                 ClientUtil.showGamemodeSelect();
-                return InteractionResultHolder.consume(player.getItemInHand(hand));
+                return InteractionResultHolder.pass(player.getItemInHand(hand));
             }
         }
         return InteractionResultHolder.fail(player.getItemInHand(hand));

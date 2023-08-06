@@ -1,6 +1,7 @@
 package codes.matthewp.sukr.block;
 
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
+import codes.matthewp.sukr.block.entity.BlockControllerEntity;
 import codes.matthewp.sukr.init.BlockEntityInit;
 import codes.matthewp.sukr.init.SoundInit;
 import net.minecraft.core.BlockPos;
@@ -66,7 +67,7 @@ public class BlockController extends Block implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return level.isClientSide ? null : ($0, pos, $1, blockEntity) -> {
-            if (blockEntity instanceof BlockConstructorEntity blockControllerEntity) {
+            if (blockEntity instanceof BlockControllerEntity blockControllerEntity) {
                 blockControllerEntity.tick();
             }
         };
