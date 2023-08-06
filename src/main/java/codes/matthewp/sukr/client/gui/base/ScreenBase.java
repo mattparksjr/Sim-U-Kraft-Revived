@@ -9,6 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScreenBase extends Screen {
 
+    protected int buttonWidth = 100;
+    protected int buttonHeight = 20;
+    protected int smallButtonWidth = 40;
+
     protected ScreenBase(Component component) {
         super(component);
     }
@@ -34,6 +38,14 @@ public class ScreenBase extends Screen {
 
     public void drawString(GuiGraphics graphics, Component text, int x, int y, int z) {
         graphics.drawString(this.font, text, x, y, z);
+    }
+
+    public void setButtonHeight(int buttonHeight) {
+        this.buttonHeight = buttonHeight;
+    }
+
+    public void setButtonWidth(int buttonWidth) {
+        this.buttonWidth = buttonWidth;
     }
 
     public static void closeGUI(Button b) {

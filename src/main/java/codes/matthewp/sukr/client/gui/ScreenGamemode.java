@@ -14,11 +14,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScreenGamemode extends ScreenBase {
 
-    private final int buttonW = 200;
-    private final int buttonH = 20;
-
     public ScreenGamemode() {
         super(Component.literal("Gamemode Selection"));
+        setButtonWidth(200);
     }
 
     @Override
@@ -29,7 +27,7 @@ public class ScreenGamemode extends ScreenBase {
                 new Button.Builder(Component.translatable("simukraftr.gui.gamemode.donotrun"), button -> {
                     PacketHandler.sendToServer(new SetGamemodeC2SPacket(0));
                     Minecraft.getInstance().setScreen(null);
-                }).size(buttonW, buttonH).pos(width / 2 - buttonW / 2, height / 3 - 40).build()
+                }).size(buttonWidth, buttonHeight).pos(width / 2 - buttonWidth / 2, height / 3 - 40).build()
         );
 
         this.addRenderableWidget(
@@ -38,7 +36,7 @@ public class ScreenGamemode extends ScreenBase {
                     Faction faction = new Faction(Minecraft.getInstance().player.getUUID());
                     PacketHandler.sendToServer(new CreateFactionC2SPacket(faction));
                     Minecraft.getInstance().setScreen(null);
-                }).size(buttonW, buttonH).pos(width / 2 - buttonW / 2, height / 3 + 10).build()
+                }).size(buttonWidth, buttonHeight).pos(width / 2 - buttonWidth / 2, height / 3 + 10).build()
         );
 
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.gamemode.creative"), button -> {
@@ -46,7 +44,7 @@ public class ScreenGamemode extends ScreenBase {
                     Faction faction = new Faction(Minecraft.getInstance().player.getUUID());
                     PacketHandler.sendToServer(new CreateFactionC2SPacket(faction));
                     Minecraft.getInstance().setScreen(null);
-                }).size(buttonW, buttonH).pos(width / 2 - buttonW / 2, height / 3 + 60).build()
+                }).size(buttonWidth, buttonHeight).pos(width / 2 - buttonWidth / 2, height / 3 + 60).build()
         );
     }
 

@@ -15,9 +15,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class ScreenHireBuilder extends ScreenBase {
-
-    private final int buttonH = 20;
-    private int buttonW = 100;
     private final HashMap<UUID, String> map;
     private final BlockPos pos;
 
@@ -30,14 +27,14 @@ public class ScreenHireBuilder extends ScreenBase {
     @Override
     protected void init() {
         super.init();
-        buttonW = (width - 10) / 4;
+        setButtonWidth((width - 10) / 4);
 
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.button.done"),
-                ScreenBase::closeGUI).size(40, buttonH).pos(5, 5).build());
+                ScreenBase::closeGUI).size(smallButtonWidth, buttonHeight).pos(5, 5).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.cancel"),
-                ScreenBase::closeGUI).size((width - 20) / 2, buttonH).pos(10, height - (20 + buttonH)).build());
+                ScreenBase::closeGUI).size((width - 20) / 2, buttonHeight).pos(10, height - (20 + buttonHeight)).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.ok"),
-                ScreenBase::closeGUI).size((width - 20) / 2, buttonH).pos(width / 2, height - (20 + buttonH)).build());
+                ScreenBase::closeGUI).size((width - 20) / 2, buttonHeight).pos(width / 2, height - (20 + buttonHeight)).build());
 
         int rowCount = 0;
         int currentRow = 0;
@@ -49,7 +46,7 @@ public class ScreenHireBuilder extends ScreenBase {
 
             this.addRenderableWidget(new Button.Builder(Component.literal(map.get(uuid)), button -> {
                 PacketHandler.sendToServer(new SetWorkerC2SPacket(pos, uuid));
-            }).size(buttonW, buttonH).pos(5 + (rowCount * buttonW), height / 3 + 10 + (currentRow * buttonH)).build());
+            }).size(buttonWidth, buttonHeight).pos(5 + (rowCount * buttonWidth), height / 3 + 10 + (currentRow * buttonHeight)).build());
             rowCount++;
         }
 
