@@ -10,11 +10,88 @@
       "author": "Zelamy"
     },
     {
-      "id": "simukraftr.structure.nowoolstarter2",
-      "name": "No Wool Starter Home",
-      "category": "Residential",
-      "file": "og-no_wool_starter_home",
-      "author": "Iterable"
+      "id": "simukraftr.structure.bakery",
+      "name": "Bakery",
+      "category": "Commercial",
+      "file": "og-bakery",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.butcher",
+      "name": "Butcher",
+      "category": "Commercial",
+      "file": "og-butcher",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.grocery_store",
+      "name": "Grocery Store",
+      "category": "Commercial",
+      "file": "og-grocery_store",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.farm_cattle",
+      "name": "Cattle Farm",
+      "category": "Industrial",
+      "file": "og-basic_farm",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.farm_chicken",
+      "name": "Chicken Farm",
+      "category": "Industrial",
+      "file": "og-basic_farm",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.farm_dairy",
+      "name": "Dairy Farm",
+      "category": "Industrial",
+      "file": "og-basic_farm",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.farm_egg",
+      "name": "Egg Farm",
+      "category": "Industrial",
+      "file": "og-basic_farm",
+      "author": "Ashjack"
+    },
+    {
+      "id": "simukraftr.structure.farm_pig",
+      "name": "Pig Farm",
+      "category": "Industrial",
+      "file": "og-basic_farm",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.farm_sheep",
+      "name": "Sheep Farm",
+      "category": "Industrial",
+      "file": "og-basic_farm",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.barracks",
+      "name": "Barracks",
+      "category": "Industrial",
+      "file": "og-barracks",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.lumbermill",
+      "name": "Lumbermill",
+      "category": "Industrial",
+      "file": "og-lumbermill",
+      "author": "Anonymous"
+    },
+    {
+      "id": "simukraftr.structure.fishing_dock",
+      "name": "Fishing Dock",
+      "category": "Industrial",
+      "file": "og-fishing_dock",
+      "author": "Anonymous"
     }
   ]
 }
