@@ -1,36 +1,27 @@
 package codes.matthewp.sukr.net.packet.update;
 
-import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
-import codes.matthewp.sukr.data.SimData;
-import codes.matthewp.sukr.entity.EntityFolk;
-import codes.matthewp.sukr.net.PacketHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
-import java.util.UUID;
 import java.util.function.Supplier;
 
-public class SetWorkerC2SPacket {
+public class FireWorkerC2SPacket {
 
     private final BlockPos pos;
-    private final UUID workerID;
 
-    public SetWorkerC2SPacket(BlockPos pos, UUID workerID) {
+    public FireWorkerC2SPacket(BlockPos pos) {
         this.pos = pos;
-        this.workerID = workerID;
     }
 
-    public SetWorkerC2SPacket(FriendlyByteBuf buf) {
+    public FireWorkerC2SPacket(FriendlyByteBuf buf) {
         this.pos = buf.readBlockPos();
-        this.workerID = buf.readUUID();
     }
 
     public void toBytes(FriendlyByteBuf buf) {
         buf.writeBlockPos(pos);
-        buf.writeUUID(workerID);
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
@@ -38,14 +29,9 @@ public class SetWorkerC2SPacket {
         context.enqueueWork(() -> {
             if (ServerLifecycleHooks.getCurrentServer() != null) {
                 BlockConstructorEntity blockEntity = (BlockConstructorEntity) ServerLifecycleHooks.getCurrentServer().overworld().getBlockEntity(pos);
-                EntityFolk folk = (EntityFolk) ServerLifecycleHooks.getCurrentServer().overworld().getEntity(workerID);
-                if(blockEntity != null) {
-                    blockEntity.setEmployee(workerID);
+                if (blockEntity != null) {
+                    blockEntity.fireEmployee();
                 }
-                if(folk != null) {
-                    folk.getEntityData().set(EntityFolk.JOB_SITE, pos);
-                }
-                PacketHandler.sendToPlayer(new WorkerSetS2CPacket(), context.getSender());
             }
         });
         return true;

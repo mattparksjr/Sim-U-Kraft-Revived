@@ -3,6 +3,7 @@ package codes.matthewp.sukr.net;
 import codes.matthewp.sukr.SimUKraft;
 import codes.matthewp.sukr.net.packet.*;
 import codes.matthewp.sukr.net.packet.sync.*;
+import codes.matthewp.sukr.net.packet.update.FireWorkerC2SPacket;
 import codes.matthewp.sukr.net.packet.update.SetWorkerC2SPacket;
 import codes.matthewp.sukr.net.packet.update.WorkerSetS2CPacket;
 import net.minecraft.network.FriendlyByteBuf;
@@ -96,7 +97,11 @@ public class PacketHandler {
                 .encoder(SyncStructuresS2CPacket::toBytes)
                 .consumerMainThread(SyncStructuresS2CPacket::handle)
                 .add();
-
+        INSTANCE.messageBuilder(FireWorkerC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(FireWorkerC2SPacket::new)
+                .encoder(FireWorkerC2SPacket::toBytes)
+                .consumerMainThread(FireWorkerC2SPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG msg) {

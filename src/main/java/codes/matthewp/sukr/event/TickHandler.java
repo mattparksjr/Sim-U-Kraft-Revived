@@ -36,8 +36,8 @@ public class TickHandler {
         if (level.players().isEmpty()) return;
 
         ServerPlayer player = faction.getFirstOnline(level);
-        int x = (random.nextInt(2) == 1) ? player.getBlockX() + random.nextInt(25) : player.getBlockX() - random.nextInt(25);
-        int z = (random.nextInt(2) == 1) ? player.getBlockZ() + random.nextInt(25) : player.getBlockZ() - random.nextInt(25);
+        int x = (random.nextInt(2) == 1) ? player.getBlockX() + random.nextInt(50) : player.getBlockX() - random.nextInt(25);
+        int z = (random.nextInt(2) == 1) ? player.getBlockZ() + random.nextInt(50) : player.getBlockZ() - random.nextInt(25);
         BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, 0, z));
 
         EntityFolk folk = EntityInit.FOLK.get().spawn(level, pos, MobSpawnType.NATURAL);

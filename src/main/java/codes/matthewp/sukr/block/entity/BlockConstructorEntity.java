@@ -86,4 +86,8 @@ public class BlockConstructorEntity extends BlockEntity {
             this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
         }
     }
+
+    public void fireEmployee() {
+        this.employee = "";
+    }
 }

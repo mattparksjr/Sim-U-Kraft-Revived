@@ -5,6 +5,8 @@ import codes.matthewp.sukr.block.entity.BlockConstructorEntity;
 import codes.matthewp.sukr.client.gui.base.ScreenBase;
 import codes.matthewp.sukr.net.PacketHandler;
 import codes.matthewp.sukr.net.packet.sync.RequestHireBuilderInfoC2SPacket;
+import codes.matthewp.sukr.net.packet.update.FireWorkerC2SPacket;
+import codes.matthewp.sukr.net.packet.update.SetWorkerC2SPacket;
 import codes.matthewp.sukr.util.ClientUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -59,7 +61,9 @@ public class ScreenConstructor extends ScreenBase {
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.choose"), button -> {
             ClientUtil.showChooseType(entityPos, player);
         }).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 + 10, height / 2).build());
-        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.fire"), ScreenBase::closeGUI).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 + buttonWidth + 10, height / 2).build());
+        this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.fire"), btn -> {
+            PacketHandler.sendToServer(new FireWorkerC2SPacket(entityPos));
+        }).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 + buttonWidth + 10, height / 2).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.terraformer"), ScreenBase::closeGUI).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 - buttonWidth + 10, height / 2 + buttonHeight).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.terraform"), ScreenBase::closeGUI).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 + 10, height / 2 + buttonHeight).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.showemp"), ScreenBase::closeGUI).size((width - 20) / 3, buttonHeight).pos((width - 20) / 3 + buttonWidth + 10, height / 2 + buttonHeight).build());

@@ -18,6 +18,8 @@ public class ScreenHireBuilder extends ScreenBase {
     private final HashMap<UUID, String> map;
     private final BlockPos pos;
 
+    private UUID uuid;
+
     public ScreenHireBuilder(BlockPos pos, HashMap<UUID, String> map) {
         super(Component.literal("Constructor"));
         this.map = map;
@@ -32,7 +34,7 @@ public class ScreenHireBuilder extends ScreenBase {
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.button.done"),
                 ScreenBase::closeGUI).size(smallButtonWidth, buttonHeight).pos(5, 5).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.cancel"),
-                ScreenBase::closeGUI).size((width - 20) / 2, buttonHeight).pos(10, height - (20 + buttonHeight)).build());
+                button -> PacketHandler.sendToServer(new SetWorkerC2SPacket(pos, uuid))).size((width - 20) / 2, buttonHeight).pos(10, height - (20 + buttonHeight)).build());
         this.addRenderableWidget(new Button.Builder(Component.translatable("simukraftr.gui.constructor.ok"),
                 ScreenBase::closeGUI).size((width - 20) / 2, buttonHeight).pos(width / 2, height - (20 + buttonHeight)).build());
 
@@ -45,7 +47,8 @@ public class ScreenHireBuilder extends ScreenBase {
             }
 
             this.addRenderableWidget(new Button.Builder(Component.literal(map.get(uuid)), button -> {
-                PacketHandler.sendToServer(new SetWorkerC2SPacket(pos, uuid));
+                button.active = false;
+                this.uuid = uuid;
             }).size(buttonWidth, buttonHeight).pos(5 + (rowCount * buttonWidth), height / 3 + 10 + (currentRow * buttonHeight)).build());
             rowCount++;
         }
