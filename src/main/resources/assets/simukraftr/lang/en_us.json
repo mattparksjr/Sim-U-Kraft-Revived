@@ -55,9 +55,7 @@
   "simukraftr.gui.gamemode.cdesc": "Have to supply no resources. Everything is free. Let your imagination run wild.",
   "simukraftr.gui.gamemode.survival": "Survival mode",
   "simukraftr.gui.gamemode.creative": "Creative mode",
-  "simukraftr.gui.overlay.credits": "Sim-U-Credits: %d",
-  "simukraftr.gui.overlay.day": "Day: %d",
-  "simukraftr.gui.overlay.population": "Population: %d",
+  "simukraftr.gui.overlay": "Sim-U-Kraft (%d) - Population: %d - Sim-U-credits: %d",
   "sounds.simukraft.constructor_activated": "[Building Constructor Activated]",
   "simukraftr.structure.nowoolstater": "No Wool Starter Home"
 }

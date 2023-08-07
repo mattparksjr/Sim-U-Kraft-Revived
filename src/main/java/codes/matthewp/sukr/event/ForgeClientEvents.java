@@ -1,6 +1,7 @@
 package codes.matthewp.sukr.event;
 
 import codes.matthewp.sukr.SimUKraft;
+import codes.matthewp.sukr.data.ClientSimData;
 import codes.matthewp.sukr.data.player.PlayerDataProvider;
 import codes.matthewp.sukr.util.KeyBinding;
 import net.minecraft.ChatFormatting;
@@ -26,13 +27,16 @@ public class ForgeClientEvents {
 
     @SubscribeEvent
     public static void onOverlay(RenderGuiOverlayEvent event) {
-        event.getGuiGraphics().drawString(Minecraft.getInstance().font, Component.literal(I18n.get("simukraftr.gui.overlay.day", 1)).withStyle(ChatFormatting.WHITE), 1, 1, 1);
-        event.getGuiGraphics().drawString(Minecraft.getInstance().font, Component.literal(I18n.get("simukraftr.gui.overlay.population", 1)).withStyle(ChatFormatting.WHITE), 1, 11, 1);
-
+        int pop;
+        if(ClientSimData.getFaction() != null) {
+            pop = ClientSimData.getFaction().getData().getFolks().size();
+        } else {
+            pop = 0;
+        }
         Minecraft.getInstance().player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(data ->
                 event.getGuiGraphics().drawString(
                         Minecraft.getInstance().font,
-                        Component.literal(I18n.get("simukraftr.gui.overlay.credits", data.getMoney())).withStyle(ChatFormatting.WHITE),
-                        1, 21, 1));
+                        Component.literal(I18n.get("simukraftr.gui.overlay", "Sun", String.valueOf(pop), data.getMoney())).withStyle(ChatFormatting.WHITE),
+                        1, 1, 1));
     }
 }

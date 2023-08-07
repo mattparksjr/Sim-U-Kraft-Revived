@@ -22,12 +22,13 @@ public class TickHandler {
             return;
         }
 
+
+        /// TEMP
         for (Faction faction : simData.getData().getFactions()) {
             if (shouldSpawnNewFolk(server.overworld(), faction)) {
                 summonNewFolk(server, faction);
             }
         }
-        //  SimUKraft.LOGGER.debug(new StructureManager().getBuildingBlocks(StructureData.getStructures().get(0), server.overworld()).get(0).getState().getBlock().getName().toString());
     }
 
     private static void summonNewFolk(MinecraftServer server, Faction faction) {
