@@ -37,30 +37,29 @@ public class EntityFolkRenderer extends LivingEntityRenderer<EntityFolk, Humanoi
         double distanceToSqr = this.entityRenderDispatcher.distanceToSqr(folk);
         float baseOffset = folk.getNameTagOffsetY();
         float opacity = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
-        Font font = this.getFont();
 
         if (distanceToSqr > 100.0) return;
 
         // Player is looking directly at folk, need to show detail view.
         if (this.entityRenderDispatcher.crosshairPickEntity != null && this.entityRenderDispatcher.crosshairPickEntity.distanceToSqr(folk) <= 4.0) {
-            renderLine(Component.literal(folk.getEntityData().get(EntityFolk.FIRST_NAME) + " " + folk.getEntityData().get(EntityFolk.LAST_NAME) + "(" + folk.getEntityData().get(EntityFolk.AGE) + ")"), pose, baseOffset + 1.25f, opacity, font, buf, packedLightCoords);
-            renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 1f, opacity, font, buf, packedLightCoords);
-            renderLine(Component.literal("Folk job").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.75f, opacity, font, buf, packedLightCoords);
+            renderLine(Component.literal(folk.getEntityData().get(EntityFolk.FIRST_NAME) + " " + folk.getEntityData().get(EntityFolk.LAST_NAME) + "(" + folk.getEntityData().get(EntityFolk.AGE) + ")"), pose, baseOffset + 1.25f, opacity, getFont(), buf, packedLightCoords);
+            renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 1f, opacity, getFont(), buf, packedLightCoords);
+            renderLine(Component.literal("Folk job").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.75f, opacity, getFont(), buf, packedLightCoords);
 
             if (folk.getEntityData().get(EntityFolk.HOME).getY() == 999) {
-                renderLine(Component.translatable("simukraftr.text.homeless").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.50f, opacity, font, buf, packedLightCoords);
+                renderLine(Component.translatable("simukraftr.text.homeless").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.50f, opacity, getFont(), buf, packedLightCoords);
             } else {
-                renderLine(Component.literal("Folk home").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.50f, opacity, font, buf, packedLightCoords);
+                renderLine(Component.literal("Folk home").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.50f, opacity, getFont(), buf, packedLightCoords);
             }
 
-            renderLine(Component.literal("Folk relationship status").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.25f, opacity, font, buf, packedLightCoords);
-            renderLine(Component.literal("Folk hunger").withStyle(ChatFormatting.YELLOW), pose, baseOffset, opacity, font, buf, packedLightCoords);
+            renderLine(Component.literal("Folk relationship status").withStyle(ChatFormatting.YELLOW), pose, baseOffset + 0.25f, opacity, getFont(), buf, packedLightCoords);
+            renderLine(Component.literal("Folk hunger").withStyle(ChatFormatting.YELLOW), pose, baseOffset, opacity, getFont(), buf, packedLightCoords);
             return;
         }
 
         // Entity is within view, but not being looked at
-        renderLine(Component.literal(folk.getEntityData().get(EntityFolk.FIRST_NAME) + " " + folk.getEntityData().get(EntityFolk.LAST_NAME) + "(" + folk.getEntityData().get(EntityFolk.AGE) + ")"), pose, baseOffset + 0.25f, opacity, font, buf, packedLightCoords);
-        renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset, opacity, font, buf, packedLightCoords);
+        renderLine(Component.literal(folk.getFullname() + " (" + folk.getEntityData().get(EntityFolk.AGE) + ")"), pose, baseOffset + 0.25f, opacity, getFont(), buf, packedLightCoords);
+        renderLine(Component.literal("Folk current task").withStyle(ChatFormatting.YELLOW), pose, baseOffset, opacity, getFont(), buf, packedLightCoords);
     }
 
     private void renderLine(Component text, PoseStack pose, float offset, float opacity, Font font, MultiBufferSource buf, int packedLightCoords) {
